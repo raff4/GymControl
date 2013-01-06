@@ -1,0 +1,23 @@
+# remove maven output files
+target/
+*.class
+
+# Eclipse junk
+.settings/
+.settings/*
+src/main/webapp/WEB-INF/lib
+.classpath
+.project
+.externalToolBuilders/
+.metadata
+*.launch
+
+#GwT junk
+.gwt
+
+# Gwt JS full compile
+src/main/webapp/gwtmaven/
+src/main/gwt-unitCache/
+src/main/webapp/WEB-INF/deploy/
+src/main/webapp/WEB-INF/classes/
+.gwt-tmp/

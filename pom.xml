@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bertazoli</groupId>
-    <artifactId>GWTMaven</artifactId>
+    <artifactId>GymControl</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>MyProject</name>
@@ -179,7 +179,7 @@
         		<configuration>
         			<filesets>
         				<fileset>
-        					<directory>src/main/webapp/gwtmaven</directory>
+        					<directory>src/main/webapp/gymcontrol</directory>
         				</fileset>
         			</filesets>
         		</configuration>
@@ -194,7 +194,7 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
-                            <goal>generateAsync</goal>
+                            <!-- <goal>generateAsync</goal> -->
                         </goals>
                     </execution>
                 </executions>
@@ -204,7 +204,7 @@
                     <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
 
                     <bindAddress>localhost</bindAddress>
-                    <runTarget>GWTMaven.html</runTarget>
+                    <runTarget>index.html</runTarget>
                     <extraJvmArgs>-Xmx512m -Xss1024k</extraJvmArgs>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <copyWebapp>true</copyWebapp>

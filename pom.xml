@@ -177,7 +177,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                        	<servicePattern>**/gwt/**/*Service.java</servicePattern>
+                        	<servicePattern>**/rpc/*Service.java</servicePattern>
                         </configuration>
                         <goals>
                             <goal>compile</goal>

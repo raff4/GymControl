@@ -7,8 +7,8 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel>
-		<g:TextBox ui:field="username">Username</g:TextBox>
-		<g:PasswordTextBox ui:field="password">Password</g:PasswordTextBox>
+		<g:TextBox ui:field="username"></g:TextBox>
+		<g:PasswordTextBox ui:field="password"></g:PasswordTextBox>
 		<g:Button ui:field="send">Send</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder>

@@ -1,7 +1,7 @@
 package com.bertazoli.client.core.login;
 
 import com.bertazoli.client.place.NameTokens;
-import com.bertazoli.remote.gwt.rpc.LoginServiceAsync;
+import com.bertazoli.client.rpc.LoginServiceAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;

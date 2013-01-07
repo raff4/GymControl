@@ -1,6 +1,7 @@
 package com.bertazoli.server.rpc;
 
 import com.bertazoli.client.rpc.LoginService;
+import com.bertazoli.server.businesslogic.Login;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Singleton;
 
@@ -11,6 +12,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
     @Override
     public String helloWorld(String message) {
+        new Login().getUserByUsername(message);
         return "This is comming from the server";
     }
 

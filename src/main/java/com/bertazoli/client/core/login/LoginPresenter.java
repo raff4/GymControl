@@ -23,6 +23,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         HasText getUsername();
         HasText getPassword();
         HasClickHandlers getSendButton();
+        HasClickHandlers getCreateAccountButton();
     }
 
     @ProxyCodeSplit
@@ -54,6 +55,13 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
             @Override
             public void onClick(ClickEvent event) {
                 doLogin(getView().getUsername().getText(), getView().getPassword().getText());
+            }
+        }));
+        
+        registerHandler(getView().getCreateAccountButton().addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                System.out.println("user clicked on create account button");
             }
         }));
     }

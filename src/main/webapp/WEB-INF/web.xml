@@ -7,7 +7,7 @@
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>GWTMaven.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<!--
@@ -30,5 +30,15 @@
 		<filter-name>guiceFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	
+	<servlet>
+		<servlet-name>login</servlet-name>
+		<servlet-class>com.bertazoli.remote.gwt.server.LoginServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>login</servlet-name>
+		<url-pattern>/gymcontrol/login</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

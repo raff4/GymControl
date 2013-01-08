@@ -1,7 +1,6 @@
 package com.bertazoli.server.filter;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -24,15 +23,9 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         
-        HashSet<String> pathToBeIgnored = new HashSet<String>();
-        pathToBeIgnored.add("/index.html");
-        pathToBeIgnored.add("/gymcontrol.css");
-        pathToBeIgnored.add("/gymcontrol/gymcontrol.nocache.js");
-        pathToBeIgnored.add("/gymcontrol/hosted.html");
-        pathToBeIgnored.add("/gymcontrol/gwt/standard/standard.css");
-        pathToBeIgnored.add("/images/");
+        String pathToBeIgnored = "/login";
 
-        if (pathToBeIgnored.contains(req.getRequestURI())) {
+        if (req.getRequestURI().startsWith(pathToBeIgnored)) {
             chain.doFilter(request, response);
         } else {
             if (session.getAttribute("securityInfo") != null && session.getAttribute("securityInfo").equals("true")) {
@@ -41,14 +34,14 @@ public class AuthFilter implements Filter {
                 rd.forward(request, response);
             } else {
                 System.out.println("user is invalid");
-                RequestDispatcher rd = req.getRequestDispatcher("/index.html#login");
+                RequestDispatcher rd = req.getRequestDispatcher("/login/login.html");
                 rd.forward(request, response);
             }    
         }
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {
+    public void init(FilterConfig config) throws ServletException {
         System.out.println("init");
     }
 }

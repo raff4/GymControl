@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<module rename-to='gwtmaven'>
+<module rename-to='gymcontrol'>
 	<!-- Inherit the core Web Toolkit stuff.                        -->
 	<inherits name='com.google.gwt.user.User'/>
 	<inherits name='com.google.gwt.inject.Inject'/>
@@ -17,11 +17,11 @@
 	<inherits name='com.gwtplatform.dispatch.Dispatch'/>
 
 	<!-- Specify the app entry point class.                         -->
-	<entry-point class='com.bertazoli.client.GWTMaven'/>
+	<entry-point class='com.bertazoli.client.GymControl'/>
 
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client'/>
-	<source path='shared'/>
+	<source path='server'/>
 
 	<define-configuration-property name='gin.ginjector' is-multi-valued='false' />
 	<set-configuration-property name='gin.ginjector' value='com.bertazoli.client.gin.ClientGinjector' />

@@ -34,7 +34,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private Provider<LoginServiceAsync> loginServiceProvider;
 
     @Inject
-    public LoginPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy, Provider<LoginServiceAsync> loginServiceProvider) {
+    public LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, Provider<LoginServiceAsync> loginServiceProvider) {
         super(eventBus, view, proxy);
         this.loginServiceProvider = loginServiceProvider;
     }
@@ -79,5 +79,9 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 System.out.println("deu merda");
             }
         });
+    }
+    
+    public void display() {
+        revealInParent();
     }
 }

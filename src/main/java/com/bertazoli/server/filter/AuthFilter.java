@@ -5,14 +5,25 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
+import com.bertazoli.client.manager.SecurityManager;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class AuthFilter implements Filter {
+
+    private SecurityManager securityManager;
+
+    @Inject
+    public AuthFilter(SecurityManager securityManager) {
+        this.securityManager = securityManager;
+    }
 
     @Override
     public void destroy() {
@@ -21,27 +32,18 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession();
+        boolean isLoginPage  = req.getRequestURI().matches("^/login/.*");
         
-        String pathToBeIgnored = "/login";
-
-        if (req.getRequestURI().startsWith(pathToBeIgnored)) {
+        if (securityManager.isUserLoggedIn() && !isLoginPage) {
             chain.doFilter(request, response);
         } else {
-            if (session.getAttribute("securityInfo") != null && session.getAttribute("securityInfo").equals("true")) {
-                System.out.println("user is valid");
-                RequestDispatcher rd = req.getRequestDispatcher("/#welcome");
-                rd.forward(request, response);
-            } else {
-                System.out.println("user is invalid");
-                RequestDispatcher rd = req.getRequestDispatcher("/login/login.html");
-                rd.forward(request, response);
-            }    
+            HttpServletResponse resp = (HttpServletResponse) response;
+            resp.sendRedirect("/login/login.html");
         }
     }
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        System.out.println("init");
+        System.out.println("initialising filter");
     }
 }

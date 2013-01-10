@@ -1,23 +1,25 @@
 package com.bertazoli.server.businesslogic;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.bertazoli.client.rpc.LoginService;
+import com.bertazoli.shared.beans.User;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-import com.bertazoli.beans.User;
-import com.bertazoli.server.hibernate.HibernateUtil;
-
-public class Login {
-    Session session = null;
+@Singleton
+public class Login implements LoginService {
     
+    @Inject
     public Login() {
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
     }
-    
-    public User getUserByUsername(String username) {
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("SELECT 1 FROM User");
-        query.list();
-        return new User();
+
+    @Override
+    public String helloWorld(String message) {
+        return "This is comming from the server";
+    }
+
+    @Override
+    public User validateUser(String username, String password) {
+        return null;
     }
 }

@@ -10,7 +10,5 @@
 		<g:TextBox ui:field="username"></g:TextBox>
 		<g:PasswordTextBox ui:field="password"></g:PasswordTextBox>
 		<g:Button ui:field="send">Send</g:Button>
-		<g:InlineLabel>Or create a new account</g:InlineLabel>
-		<g:Button ui:field="createAccount">Create Account</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder>

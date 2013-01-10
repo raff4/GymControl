@@ -2,6 +2,7 @@ package com.bertazoli.client.core.login;
 
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.LoginServiceAsync;
+import com.bertazoli.shared.beans.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -23,7 +24,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         HasText getUsername();
         HasText getPassword();
         HasClickHandlers getSendButton();
-        HasClickHandlers getCreateAccountButton();
     }
 
     @ProxyCodeSplit
@@ -57,26 +57,18 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 doLogin(getView().getUsername().getText(), getView().getPassword().getText());
             }
         }));
-        
-        registerHandler(getView().getCreateAccountButton().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                System.out.println("user clicked on create account button");
-            }
-        }));
     }
 
     private void doLogin(String username, String password) {
         LoginServiceAsync login = loginServiceProvider.get();
-        login.helloWorld(username, new AsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                System.out.println("Result from server: " + result);
-            }
-            
+        login.validateUser(username, password, new AsyncCallback<User>() {
             @Override
             public void onFailure(Throwable caught) {
-                System.out.println("deu merda");
+            }
+
+            @Override
+            public void onSuccess(User result) {
+                System.out.println(result);
             }
         });
     }

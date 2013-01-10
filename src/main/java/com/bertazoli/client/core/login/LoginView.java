@@ -18,7 +18,6 @@ public class LoginView extends ViewImpl implements LoginPresenter.MyView {
     @UiField TextBox username;
     @UiField PasswordTextBox password;
     @UiField Button send;
-    @UiField Button createAccount;
 
     public interface Binder extends UiBinder<Widget, LoginView> {
     }
@@ -46,10 +45,5 @@ public class LoginView extends ViewImpl implements LoginPresenter.MyView {
     @Override
     public HasClickHandlers getSendButton() {
         return send;
-    }
-
-    @Override
-    public HasClickHandlers getCreateAccountButton() {
-        return createAccount;
     }
 }

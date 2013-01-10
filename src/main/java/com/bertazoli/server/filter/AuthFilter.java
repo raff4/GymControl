@@ -19,7 +19,7 @@ import com.google.inject.Singleton;
 public class AuthFilter implements Filter {
 
     private SecurityManager securityManager;
-
+    
     @Inject
     public AuthFilter(SecurityManager securityManager) {
         this.securityManager = securityManager;
@@ -32,13 +32,16 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        
         boolean isLoginPage  = req.getRequestURI().matches("^/login/.*");
         
-        if (securityManager.isUserLoggedIn() && !isLoginPage) {
+        if (securityManager.isUserLoggedIn() || isLoginPage) {
+            // this will send user to login page or to requested page if the user is logged in
             chain.doFilter(request, response);
         } else {
-            HttpServletResponse resp = (HttpServletResponse) response;
-            resp.sendRedirect("/login/login.html");
+            HttpServletResponse res = (HttpServletResponse)response;
+            res.sendRedirect("/login/login.html");
+            res.flushBuffer();
         }
     }
 

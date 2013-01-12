@@ -10,19 +10,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.bertazoli.client.manager.SecurityManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class AuthFilter implements Filter {
 
-    private SecurityManager securityManager;
-    
     @Inject
-    public AuthFilter(SecurityManager securityManager) {
-        this.securityManager = securityManager;
+    public AuthFilter() {
+        
     }
 
     @Override
@@ -34,9 +32,13 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         
         boolean isLoginPage  = req.getRequestURI().matches("^/login/.*");
+        boolean isAuthenticated = false;
+        HttpSession session = req.getSession();
+        if (session.getAttribute("user") != null) {
+            isAuthenticated = true;
+        }
         
-        if (securityManager.isUserLoggedIn() || isLoginPage) {
-            // this will send user to login page or to requested page if the user is logged in
+        if (isAuthenticated || isLoginPage) {
             chain.doFilter(request, response);
         } else {
             HttpServletResponse res = (HttpServletResponse)response;

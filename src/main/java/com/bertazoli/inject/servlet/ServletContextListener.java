@@ -1,6 +1,8 @@
 package com.bertazoli.inject.servlet;
 
+import com.bertazoli.server.filter.AuthFilter;
 import com.bertazoli.server.rpc.LoginServiceImpl;
+import com.bertazoli.server.servlet.LoginServlet;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -13,7 +15,8 @@ public class ServletContextListener extends GuiceServletContextListener {
         return Guice.createInjector(new ServletModule() {
             @Override
             protected void configureServlets() {
-//                filter("/*").through(AuthFilter.class);
+                filter("/*").through(AuthFilter.class);
+                serve("/login/login.do").with(LoginServlet.class);
                 serve("/gymcontrol/login").with(LoginServiceImpl.class);
             }
         });

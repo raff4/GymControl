@@ -51,8 +51,4 @@
 	</servlet-mapping>
 	-->
 	
-	<listener>
-		<listener-class>com.bertazoli.inject.servlet.ServletContextListener</listener-class>
-	</listener>
-	
 </web-app>

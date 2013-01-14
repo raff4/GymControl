@@ -78,4 +78,8 @@ public class User implements IsSerializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean getIsLoggedIn() {
+        return false;
+    }
 }

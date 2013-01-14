@@ -14,7 +14,6 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public class LoginView extends ViewImpl implements LoginPresenter.MyView {
 
     private final Widget widget;
-    
     @UiField TextBox username;
     @UiField PasswordTextBox password;
     @UiField Button send;

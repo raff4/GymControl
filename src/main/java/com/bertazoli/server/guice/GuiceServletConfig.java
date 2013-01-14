@@ -1,5 +1,6 @@
 package com.bertazoli.server.guice;
 
+import com.bertazoli.server.rpc.UserServiceImpl;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -15,6 +16,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 new ServletModule() {
                     @Override
                     protected void configureServlets() {
+                        serve("/gymcontrol/user").with(UserServiceImpl.class);
                     }
                 });
     }

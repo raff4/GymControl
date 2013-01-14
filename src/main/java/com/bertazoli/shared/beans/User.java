@@ -1,10 +1,13 @@
 package com.bertazoli.shared.beans;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -28,9 +31,25 @@ public class User implements IsSerializable {
     @Column(name="email")
     private String email;
     
+    @Column(name="dob")
+    private Timestamp dob;
+    
+    @Column(name="salt")
+    private String salt;
+    
+    @Column(name="password")
     private String password;
 
+    @Transient
     private boolean isLoggedIn;
+
+    public Timestamp getDob() {
+        return dob;
+    }
+
+    public void setDob(Timestamp dob) {
+        this.dob = dob;
+    }
 
     public Long getId() {
         return id;
@@ -84,7 +103,15 @@ public class User implements IsSerializable {
         return isLoggedIn;
     }
     
-    public void setIsLoggedIn(boolean isLoggedIn) {
+    public void setLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

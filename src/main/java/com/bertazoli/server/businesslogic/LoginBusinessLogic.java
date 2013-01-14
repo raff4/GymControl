@@ -10,10 +10,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class Login implements LoginService {
+public class LoginBusinessLogic implements LoginService {
     
     @Inject
-    public Login() {
+    public LoginBusinessLogic() {
     }
 
     @Override

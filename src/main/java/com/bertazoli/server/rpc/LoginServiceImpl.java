@@ -1,7 +1,7 @@
 package com.bertazoli.server.rpc;
 
 import com.bertazoli.client.rpc.LoginService;
-import com.bertazoli.server.businesslogic.Login;
+import com.bertazoli.server.businesslogic.LoginBusinessLogic;
 import com.bertazoli.shared.beans.User;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
@@ -11,10 +11,10 @@ import com.google.inject.Singleton;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
     private static final long serialVersionUID = -5879498534468523044L;
-    private Login login;
+    private LoginBusinessLogic login;
     
     @Inject
-    public LoginServiceImpl(Login login) {
+    public LoginServiceImpl(LoginBusinessLogic login) {
         this.login = login;
     }
 

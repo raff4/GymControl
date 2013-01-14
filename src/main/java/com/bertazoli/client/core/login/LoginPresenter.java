@@ -77,7 +77,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                 System.out.println("login success");
                 User user = new User();
                 user.setUsername(getView().getUsername().getText());
-                user.setIsLoggedIn(true);
+                user.setLoggedIn(true);
                 LoginAuthenticatedEvent.fire(eventBus, user);
                 
                 PlaceRequest placeRequest = new PlaceRequest(NameTokens.welcome);

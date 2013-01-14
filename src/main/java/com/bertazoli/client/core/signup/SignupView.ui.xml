@@ -9,13 +9,20 @@
 
 	<g:HTMLPanel>
 	<h1>Create a new account</h1>
-	<g:TextBox ui:field="username" />
-	<g:PasswordTextBox ui:field="password" />
-	<g:PasswordTextBox ui:field="confirmPassword" />
-	<g:TextBox ui:field="firstname" />
-	<g:TextBox ui:field="lastname" />
-	<g:TextBox ui:field="email" />
-	<d:DateBox ui:field="dob" />
+	<g:InlineLabel>Username:</g:InlineLabel>
+	<g:TextBox ui:field="username" /><br/>
+	<g:InlineLabel>Password:</g:InlineLabel>
+	<g:PasswordTextBox ui:field="password" /><br/>
+	<g:InlineLabel>Confirm password:</g:InlineLabel>
+	<g:PasswordTextBox ui:field="confirmPassword" /><br/>
+	<g:InlineLabel>First name:</g:InlineLabel>
+	<g:TextBox ui:field="firstname" /><br/>
+	<g:InlineLabel>Last name:</g:InlineLabel>
+	<g:TextBox ui:field="lastname" /><br/>
+	<g:InlineLabel>email:</g:InlineLabel>
+	<g:TextBox ui:field="email" /><br/>
+	<g:InlineLabel>Date of birth:</g:InlineLabel>
+	<d:DateBox ui:field="dob" /><br/>
 	<g:Button ui:field="send">Send</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder>

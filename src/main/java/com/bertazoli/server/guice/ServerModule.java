@@ -9,6 +9,5 @@ public class ServerModule extends HandlerModule {
     @Override
     protected void configureHandlers() {
         bindHandler(LoginAction.class, LoginHandler.class);
-        
     }
 }

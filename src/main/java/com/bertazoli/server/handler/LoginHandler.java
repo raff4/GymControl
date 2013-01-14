@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bertazoli.server.businesslogic.Login;
 import com.bertazoli.shared.action.LoginAction;
 import com.bertazoli.shared.action.LoginResult;
 import com.google.inject.Inject;
@@ -14,18 +15,21 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 public class LoginHandler implements ActionHandler<LoginAction, LoginResult> {
     public final Provider<HttpServletRequest> requestProvider;
+    private Login login;
     
     @Inject
     public LoginHandler(ServletContext servletContext,
-            Provider<HttpServletRequest> requestProvider) {
+            Provider<HttpServletRequest> requestProvider,
+            Login login) {
         this.requestProvider = requestProvider;
+        this.login = login;
     }
 
     @Override
-    public LoginResult execute(LoginAction arg0, ExecutionContext arg1) throws ActionException {
+    public LoginResult execute(LoginAction action, ExecutionContext context) throws ActionException {
         LoginResult result = null;
         //TODO logic to validate user
-        if (true) {
+        if (login.validateUser(action.getUsername(), action.getPassword()) != null) {
             HttpSession session = requestProvider.get().getSession();
             result = new LoginResult(session.getId());
         }

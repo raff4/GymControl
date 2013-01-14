@@ -13,6 +13,6 @@
 		
 		<property name="javax.persistence.validation.mode">none</property>
 		
-		<mapping class="com.bertazoli.beans.User"/>
+		<mapping class="com.bertazoli.shared.beans.User"/>
 	</session-factory>
 </hibernate-configuration>

@@ -28,7 +28,6 @@ public class User implements IsSerializable {
     @Column(name="email")
     private String email;
     
-    @Column(name="password")
     private String password;
 
     private boolean isLoggedIn;

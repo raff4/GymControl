@@ -8,6 +8,8 @@ public class DispatchServletModule extends ServletModule {
 
     @Override
     public void configureServlets() {
+//        install(new JpaPersistModule("gymcontrol"));
+//        filter("/*").through(PersistFilter.class);
         serve("/" + ActionImpl.DEFAULT_SERVICE_NAME).with(DispatchServiceImpl.class);
     }
 }

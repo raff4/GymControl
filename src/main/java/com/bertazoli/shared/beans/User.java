@@ -31,6 +31,8 @@ public class User implements IsSerializable {
     @Column(name="password")
     private String password;
 
+    private boolean isLoggedIn;
+
     public Long getId() {
         return id;
     }
@@ -79,7 +81,11 @@ public class User implements IsSerializable {
         this.password = password;
     }
 
-    public boolean getIsLoggedIn() {
-        return false;
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+    
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
     }
 }

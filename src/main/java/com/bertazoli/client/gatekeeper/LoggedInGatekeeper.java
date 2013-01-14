@@ -29,7 +29,7 @@ public class LoggedInGatekeeper implements Gatekeeper {
     public boolean canReveal() {
         boolean loggedIn = false;
         if (user != null) {
-            loggedIn = user.getIsLoggedIn();
+            loggedIn = user.isLoggedIn();
         }
         return loggedIn;
     }

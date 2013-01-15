@@ -10,13 +10,10 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-	<!--
-		This Guice listener hijacks all further filters and servlets. Extra
-		filters and servlets have to be configured in your
-		ServletModule#configureServlets() by calling
-		serve(String).with(Class<? extends HttpServlet>) and
-		filter(String).through(Class<? extends Filter)
-	-->
+	<!-- This Guice listener hijacks all further filters and servlets. Extra 
+		filters and servlets have to be configured in your ServletModule#configureServlets() 
+		by calling serve(String).with(Class<? extends HttpServlet>) and filter(String).through(Class<? 
+		extends Filter) -->
 	<listener>
 		<listener-class>com.bertazoli.server.guice.GuiceServletConfig</listener-class>
 	</listener>
@@ -30,27 +27,4 @@
 		<filter-name>guiceFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<filter>
-		<filter-name>AuthFilter</filter-name>
-		<filter-class>com.bertazoli.server.filter.AuthFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>AuthFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>com.bertazoli.server.servlet.LoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login/login.do</url-pattern>
-	</servlet-mapping>
-	
-	<listener>
-		<listener-class>com.bertazoli.inject.servlet.ServletContextListener</listener-class>
-	</listener>
-	
 </web-app>

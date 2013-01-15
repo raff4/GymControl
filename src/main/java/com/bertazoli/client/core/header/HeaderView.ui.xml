@@ -6,12 +6,7 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:HTMLPanel styleName="main">
-		<g:HTMLPanel ui:field="header" />
-		<div>
-			<g:HTMLPanel ui:field="menu" styleName="inlineBlock" />
-			<g:HTMLPanel ui:field="content" styleName="inlineBlock">Main Content</g:HTMLPanel>
-		</div>
-		<g:HTMLPanel ui:field="footer" />
+	<g:HTMLPanel>
+	Header
 	</g:HTMLPanel>
 </ui:UiBinder>

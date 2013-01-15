@@ -5,12 +5,17 @@
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
+	<ui:with type="com.bertazoli.client.place.NameTokens" field="nametokens"></ui:with>
 
 	<g:HTMLPanel>
-		<g:TextBox ui:field="username"></g:TextBox>
-		<g:PasswordTextBox ui:field="password"></g:PasswordTextBox>
+		<g:InlineLabel>Username:</g:InlineLabel><br />
+		<g:TextBox ui:field="username"/><br />
+		<g:InlineLabel>Password:</g:InlineLabel><br />
+		<g:PasswordTextBox ui:field="password"/><br />
 		<g:Button ui:field="send">Send</g:Button>
-		<g:InlineLabel>Or create a new account</g:InlineLabel>
-		<g:Button ui:field="createAccount">Create Account</g:Button>
+		<br />
+		OR
+		<br />
+		<g:InlineHyperlink targetHistoryToken="{nametokens.getSignup}">Sign Up</g:InlineHyperlink>
 	</g:HTMLPanel>
 </ui:UiBinder>

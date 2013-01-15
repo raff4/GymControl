@@ -1,7 +1,10 @@
 package com.bertazoli.client.core.login;
 
+import com.bertazoli.client.events.LoginAuthenticatedEvent;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.LoginServiceAsync;
+import com.bertazoli.shared.action.LoginAction;
+import com.bertazoli.shared.action.LoginResult;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -10,10 +13,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
@@ -23,20 +30,28 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
         HasText getUsername();
         HasText getPassword();
         HasClickHandlers getSendButton();
-        HasClickHandlers getCreateAccountButton();
     }
 
     @ProxyCodeSplit
     @NameToken(NameTokens.login)
+    @NoGatekeeper
     public interface MyProxy extends ProxyPlace<LoginPresenter> {
     }
 
-    private Provider<LoginServiceAsync> loginServiceProvider;
+    private DispatchAsync dispatcher;
+    private EventBus eventBus;
+    private PlaceManager placeManager;
+    private Provider<LoginServiceAsync> loginProvider;
 
     @Inject
-    public LoginPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy, Provider<LoginServiceAsync> loginServiceProvider) {
+    public LoginPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
+            DispatchAsync dispatcher, PlaceManager placeManager,
+            Provider<LoginServiceAsync> loginProvider) {
         super(eventBus, view, proxy);
-        this.loginServiceProvider = loginServiceProvider;
+        this.dispatcher = dispatcher;
+        this.eventBus = eventBus;
+        this.placeManager = placeManager;
+        this.loginProvider = loginProvider;
     }
 
     @Override
@@ -47,36 +62,29 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     @Override
     protected void onBind() {
         super.onBind();
-        setuClickHandlers();
-    }
-
-    private void setuClickHandlers() {
         registerHandler(getView().getSendButton().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                doLogin(getView().getUsername().getText(), getView().getPassword().getText());
-            }
-        }));
-        
-        registerHandler(getView().getCreateAccountButton().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                System.out.println("user clicked on create account button");
+                sendCredentialsToServer();
             }
         }));
     }
 
-    private void doLogin(String username, String password) {
-        LoginServiceAsync login = loginServiceProvider.get();
-        login.helloWorld(username, new AsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                System.out.println("Result from server: " + result);
-            }
-            
+    private void sendCredentialsToServer() {
+        dispatcher.execute(new LoginAction(getView().getUsername().getText(), getView().getPassword().getText()), new AsyncCallback<LoginResult>() {
             @Override
             public void onFailure(Throwable caught) {
-                System.out.println("deu merda");
+                System.out.println("login failed");
+            }
+            @Override
+            public void onSuccess(LoginResult result) {
+                if (result != null) {
+                    LoginAuthenticatedEvent.fire(getEventBus(), result.getUser());
+                    PlaceRequest placeRequest = new PlaceRequest(NameTokens.welcome);
+                    placeManager.revealPlace(placeRequest);
+                } else {
+                    System.out.println("invalid password");
+                }
             }
         });
     }

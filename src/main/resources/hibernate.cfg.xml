@@ -5,14 +5,14 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gymcontrol</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bertazol_gymcontrol</property>
+		<property name="hibernate.connection.username">bertazol_gym</property>
+		<property name="hibernate.connection.password">ta26ti</property>
+		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		
 		<property name="javax.persistence.validation.mode">none</property>
 		
-		<mapping class="com.bertazoli.beans.User"/>
+		<mapping class="com.bertazoli.shared.beans.User"/>
 	</session-factory>
 </hibernate-configuration>

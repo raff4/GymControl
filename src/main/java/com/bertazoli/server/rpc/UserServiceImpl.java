@@ -23,4 +23,9 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
         return userBusinessLogic.create(user);
     }
 
+    @Override
+    public boolean usernameExists(String username) {
+        return userBusinessLogic.usernameExists(username);
+    }
+
 }

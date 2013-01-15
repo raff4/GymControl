@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.bertazoli.server.businesslogic.LoginBusinessLogic;
 import com.bertazoli.shared.action.LoginAction;
 import com.bertazoli.shared.action.LoginResult;
+import com.bertazoli.shared.beans.User;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.dispatch.server.ExecutionContext;
@@ -28,10 +29,10 @@ public class LoginHandler implements ActionHandler<LoginAction, LoginResult> {
     @Override
     public LoginResult execute(LoginAction action, ExecutionContext context) throws ActionException {
         LoginResult result = null;
-        //TODO logic to validate user
-        if (login.validateUser(action.getUsername(), action.getPassword()) != null) {
+        User user = login.validateUser(action.getUsername(), action.getPassword());
+        if (user != null) {
             HttpSession session = requestProvider.get().getSession();
-            result = new LoginResult(session.getId());
+            result = new LoginResult(session.getId(), user);
         }
         return result;
     }

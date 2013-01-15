@@ -8,6 +8,8 @@ import com.bertazoli.client.core.header.HeaderPresenter;
 import com.bertazoli.client.core.header.HeaderView;
 import com.bertazoli.client.core.login.LoginPresenter;
 import com.bertazoli.client.core.login.LoginView;
+import com.bertazoli.client.core.signup.SignupPresenter;
+import com.bertazoli.client.core.signup.SignupView;
 import com.bertazoli.client.gatekeeper.LoggedInGatekeeper;
 import com.bertazoli.client.place.ClientPlaceManager;
 import com.bertazoli.client.place.DefaultPlace;
@@ -15,8 +17,6 @@ import com.bertazoli.client.place.NameTokens;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.bertazoli.client.core.signup.SignupPresenter;
-import com.bertazoli.client.core.signup.SignupView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -29,7 +29,6 @@ public class ClientModule extends AbstractPresenterModule {
         bindPresenterWidget(HeaderPresenter.class, HeaderPresenter.MyView.class, HeaderView.class);
         bindPresenterWidget(FooterPresenter.class, FooterPresenter.MyView.class, FooterView.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
-
         bindPresenter(SignupPresenter.class, SignupPresenter.MyView.class, SignupView.class, SignupPresenter.MyProxy.class);
     }
 }

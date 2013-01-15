@@ -19,11 +19,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     }
 
     @Override
-    public String helloWorld(String message) {
-        return login.helloWorld(message);
-    }
-
-    @Override
     public User validateUser(String username, String password) {
         return login.validateUser(username, password);
     }

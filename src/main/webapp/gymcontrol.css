@@ -35,3 +35,6 @@
 	display: inline-block;
 }
 
+.passwordMatch {
+	background-color: green;
+}

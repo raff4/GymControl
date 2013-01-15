@@ -1,10 +1,12 @@
 package com.bertazoli.server.businesslogic;
 
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.bertazoli.client.rpc.LoginService;
 import com.bertazoli.server.hibernate.HibernateUtil;
+import com.bertazoli.shared.Util;
 import com.bertazoli.shared.beans.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -17,17 +19,23 @@ public class LoginBusinessLogic implements LoginService {
     }
 
     @Override
-    public String helloWorld(String message) {
-        return "This is comming from the server";
-    }
-
-    @Override
     public User validateUser(String username, String password) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query query = session.createQuery("SELECT 1 FROM User");
-        query.list();
+        Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("username", username));
+        User user = (User) criteria.uniqueResult();
         session.getTransaction().commit();
-        return null;
+        if (user != null) {
+            if (user.getPassword().equals(Util.getEncryptedPassword(password, user.getSalt()))) {
+                user.setLoggedIn(true);
+                user.setPassword(null);
+                user.setSalt(null);
+                return user;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

@@ -2,9 +2,9 @@ package com.bertazoli.client.core.login;
 
 import com.bertazoli.client.events.LoginAuthenticatedEvent;
 import com.bertazoli.client.place.NameTokens;
+import com.bertazoli.client.rpc.LoginServiceAsync;
 import com.bertazoli.shared.action.LoginAction;
 import com.bertazoli.shared.action.LoginResult;
-import com.bertazoli.shared.beans.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -12,6 +12,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -40,14 +41,17 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     private DispatchAsync dispatcher;
     private EventBus eventBus;
     private PlaceManager placeManager;
+    private Provider<LoginServiceAsync> loginProvider;
 
     @Inject
     public LoginPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
-            DispatchAsync dispatcher, PlaceManager placeManager) {
+            DispatchAsync dispatcher, PlaceManager placeManager,
+            Provider<LoginServiceAsync> loginProvider) {
         super(eventBus, view, proxy);
         this.dispatcher = dispatcher;
         this.eventBus = eventBus;
         this.placeManager = placeManager;
+        this.loginProvider = loginProvider;
     }
 
     @Override
@@ -74,14 +78,13 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
             }
             @Override
             public void onSuccess(LoginResult result) {
-                System.out.println("login success");
-                User user = new User();
-                user.setUsername(getView().getUsername().getText());
-                user.setLoggedIn(true);
-                LoginAuthenticatedEvent.fire(eventBus, user);
-                
-                PlaceRequest placeRequest = new PlaceRequest(NameTokens.welcome);
-                placeManager.revealPlace(placeRequest);
+                if (result != null) {
+                    LoginAuthenticatedEvent.fire(getEventBus(), result.getUser());
+                    PlaceRequest placeRequest = new PlaceRequest(NameTokens.welcome);
+                    placeManager.revealPlace(placeRequest);
+                } else {
+                    System.out.println("invalid password");
+                }
             }
         });
     }

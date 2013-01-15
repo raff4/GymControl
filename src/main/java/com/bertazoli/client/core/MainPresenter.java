@@ -60,7 +60,6 @@ public class MainPresenter extends Presenter<MainPresenter.MyView, MainPresenter
 
     @Override
     protected void revealInParent() {
-        System.out.println("here");
         RevealRootContentEvent.fire(this, this);
         setInSlot(TYPE_SetHeader, headerPresenter);
         setInSlot(TYPE_SetFooter, footerPresenter);

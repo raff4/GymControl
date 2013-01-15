@@ -3,21 +3,30 @@ package com.bertazoli.client.core.signup;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.bertazoli.client.events.LoginAuthenticatedEvent;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.UserServiceAsync;
 import com.bertazoli.shared.beans.User;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
@@ -25,13 +34,14 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
 
     public interface MyView extends View {
         HasText getUsername();
-        HasText getPassword();
-        HasText getConfirmPassword();
+        PasswordTextBox getPassword();
+        PasswordTextBox getConfirmPassword();
         HasText getFirstName();
         HasText getLastName();
         HasText getEmail();
         Date getDOB();
         HasClickHandlers getSendButton();
+        void passwordMatch(boolean value);
     }
 
     @ProxyCodeSplit
@@ -39,12 +49,15 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
     public interface MyProxy extends ProxyPlace<SignupPresenter> {
     }
     private Provider<UserServiceAsync> userProvider;
+    private PlaceManager placeManager;
 
     @Inject
     public SignupPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
-            Provider<UserServiceAsync> userProvider) {
+            Provider<UserServiceAsync> userProvider,
+            PlaceManager placeManager) {
         super(eventBus, view, proxy);
         this.userProvider = userProvider;
+        this.placeManager = placeManager;
     }
 
     @Override
@@ -58,26 +71,64 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
         registerHandler(getView().getSendButton().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                UserServiceAsync action = userProvider.get();
-                User user = new User();
-                user.setUsername(getView().getUsername().getText());
-                user.setPassword(getView().getPassword().getText());
-                user.setFirstName(getView().getFirstName().getText());
-                user.setLastName(getView().getLastName().getText());
-                user.setEmail(getView().getEmail().getText());
-                user.setDob(new Timestamp(getView().getDOB().getTime()));
-                action.create(user, new AsyncCallback<User>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println("fail");
-                    }
-
-                    @Override
-                    public void onSuccess(User result) {
-                        System.out.println("success");
-                    }
-                });
+                doLogin();
             }
         }));
+        
+        registerHandler(getView().getConfirmPassword().addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                validatePassword();
+            }
+        }));
+        registerHandler(getView().getConfirmPassword().addKeyUpHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                validatePassword();
+            }
+        }));
+        
+        registerHandler(getView().getPassword().addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                validatePassword();
+            }
+        }));
+        registerHandler(getView().getPassword().addKeyUpHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                validatePassword();
+            }
+        }));
+    }
+    
+    private void validatePassword() {
+        getView().passwordMatch(getView().getPassword().getText().equals(getView().getConfirmPassword().getText()));
+    }
+    
+    private void doLogin() {
+        UserServiceAsync action = userProvider.get();
+        User user = new User();
+        user.setUsername(getView().getUsername().getText());
+        user.setPassword(getView().getPassword().getText());
+        user.setFirstName(getView().getFirstName().getText());
+        user.setLastName(getView().getLastName().getText());
+        user.setEmail(getView().getEmail().getText());
+        user.setDob(new Timestamp(getView().getDOB().getTime()));
+        action.create(user, new AsyncCallback<User>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                GWT.log("error creating account");
+            }
+
+            @Override
+            public void onSuccess(User result) {
+                if (result != null && result.isLoggedIn()) {
+                    getEventBus().fireEvent(new LoginAuthenticatedEvent(result));
+                    PlaceRequest request = new PlaceRequest(NameTokens.welcome);
+                    placeManager.revealPlace(request);
+                }
+            }
+        });
     }
 }

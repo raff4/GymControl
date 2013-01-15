@@ -6,6 +6,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("login")
 public interface LoginService  extends RemoteService {
-    public String helloWorld(String message);
     public User validateUser(String username, String password);
 }

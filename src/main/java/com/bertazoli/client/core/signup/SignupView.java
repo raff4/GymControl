@@ -46,12 +46,12 @@ public class SignupView extends ViewImpl implements SignupPresenter.MyView {
     }
 
     @Override
-    public HasText getPassword() {
+    public PasswordTextBox getPassword() {
         return password;
     }
 
     @Override
-    public HasText getConfirmPassword() {
+    public PasswordTextBox getConfirmPassword() {
         return confirmPassword;
     }
 
@@ -78,5 +78,11 @@ public class SignupView extends ViewImpl implements SignupPresenter.MyView {
     @Override
     public HasClickHandlers getSendButton() {
         return send;
+    }
+
+    @Override
+    public void passwordMatch(boolean value) {
+        password.setStyleName("passwordMatch", value);
+        confirmPassword.setStyleName("passwordMatch", value);
     }
 }

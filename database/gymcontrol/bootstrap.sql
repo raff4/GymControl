@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset VitorBertazoli:initial (dbms:mysql failOnError:false)
+--changeset VitorBertazoli:initial (dbms:mysql failOnError:true)
 CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   firstname varchar(45),

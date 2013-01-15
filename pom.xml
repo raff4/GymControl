@@ -203,7 +203,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -228,7 +228,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>${gwt-maven-plugin.version}</version>
-
 				<executions>
 					<execution>
 						<configuration>
@@ -240,7 +239,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 				<configuration>
 					<bindAddress>localhost</bindAddress>
 					<runTarget>index.html</runTarget>
@@ -248,7 +246,6 @@
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<copyWebapp>true</copyWebapp>
 				</configuration>
-
 			</plugin>
 
 			<plugin>
@@ -286,9 +283,9 @@
 				<configuration>
 					<changeLogFile>database/gymcontrol/bootstrap.xml</changeLogFile>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/gymcontrol</url>
-					<username>root</username>
-					<password>root</password>
+					<url>jdbc:mysql://localhost:3306/bertazol_gymcontrol</url>
+					<username>bertazol_gym</username>
+					<password>ta26ti</password>
 					<!-- <context>sampledata</context> -->
 					<!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
 					<!-- <clearCheckSums>true</clearCheckSums> -->
@@ -297,5 +294,28 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>production</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+						<version>2.0.1</version>
+						<configuration>
+							<changeLogFile>database/gymcontrol/bootstrap.xml</changeLogFile>
+							<driver>com.mysql.jdbc.Driver</driver>
+							<url>jdbc:mysql://bertazoli.com:3306/bertazol_gymcontrol</url>
+							<username>bertazol_gym</username>
+							<password>ta26ti</password>
+							<rollbackTag>initial</rollbackTag>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

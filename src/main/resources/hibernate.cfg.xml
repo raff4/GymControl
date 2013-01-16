@@ -14,5 +14,9 @@
 		<property name="javax.persistence.validation.mode">none</property>
 		
 		<mapping class="com.bertazoli.shared.beans.User"/>
+		<mapping class="com.bertazoli.shared.beans.WorkoutCardio"/>
+		<mapping class="com.bertazoli.shared.beans.WorkoutRegular"/>
+		<mapping class="com.bertazoli.shared.beans.WorkoutDropSetSet"/>
+		<mapping class="com.bertazoli.shared.beans.WorkoutDropSet"/>
 	</session-factory>
 </hibernate-configuration>

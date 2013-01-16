@@ -12,7 +12,9 @@
 		<g:TextBox ui:field="username"/><br />
 		<g:InlineLabel>Password:</g:InlineLabel><br />
 		<g:PasswordTextBox ui:field="password"/><br />
-		<g:Button ui:field="send">Send</g:Button>
+		<span class="button">
+			<g:Button ui:field="send">Send</g:Button>
+		</span>
 		<br />
 		OR
 		<br />

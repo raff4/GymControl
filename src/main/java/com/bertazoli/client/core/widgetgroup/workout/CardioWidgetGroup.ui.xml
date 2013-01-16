@@ -6,7 +6,12 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:HTMLPanel styleName="footer boxBottom alignCenter fullWidth gradientBackground2">
-		Footer
+	<g:HTMLPanel styleName="gradientBackground2 box padding5">
+		<g:InlineLabel>Name:</g:InlineLabel>
+		<g:TextBox ui:field="name"/>
+		<g:InlineLabel>Hours:</g:InlineLabel>
+		<g:TextBox ui:field="hours" styleName="width25" maxLength="2"/>
+		<g:InlineLabel>Minutes:</g:InlineLabel>
+		<g:TextBox ui:field="minutes" styleName="width25" maxLength="2"/>
 	</g:HTMLPanel>
 </ui:UiBinder>

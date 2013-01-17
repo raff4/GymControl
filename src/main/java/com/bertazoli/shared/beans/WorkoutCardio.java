@@ -1,13 +1,18 @@
 package com.bertazoli.shared.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 @Entity
 @Table(name="workout_cardio")
-public class WorkoutCardio {
+public class WorkoutCardio implements IsSerializable {
     
     @Id
     @GeneratedValue
@@ -18,6 +23,10 @@ public class WorkoutCardio {
     private Integer hours;
     
     private Integer minutes;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userid", nullable=false)
+    private User user;
 
     public Long getId() {
         return id;
@@ -49,5 +58,13 @@ public class WorkoutCardio {
 
     public void setMinutes(Integer minutes) {
         this.minutes = minutes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

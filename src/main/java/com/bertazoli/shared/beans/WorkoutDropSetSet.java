@@ -1,18 +1,18 @@
 package com.bertazoli.shared.beans;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name="workout_dropset_set")
-public class WorkoutDropSetSet {
+public class WorkoutDropSetSet implements IsSerializable {
 
     @Id
     private Long id;
     
-    @Column(name="dropset_id")
     private Integer dropsetId;
     
     private Integer sets;

@@ -19,6 +19,8 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     @UiField Button addCardio;
     @UiField Button addRegular;
     @UiField Button addDropSet;
+    @UiField Button save;
+    @UiField Button cancel;
     @UiField HTMLPanel workouts;
 
     @Inject
@@ -26,6 +28,11 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
         widget = binder.createAndBindUi(this);
     }
 
+    @Override
+    public void clear() {
+        workouts.clear();
+    }
+    
     @Override
     public Widget asWidget() {
         return widget;
@@ -49,5 +56,15 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     @Override
     public HTMLPanel getWorkoutsPanel() {
         return workouts;
+    }
+
+    @Override
+    public HasClickHandlers getSaveButton() {
+        return save;
+    }
+
+    @Override
+    public HasClickHandlers getCancelButton() {
+        return cancel;
     }
 }

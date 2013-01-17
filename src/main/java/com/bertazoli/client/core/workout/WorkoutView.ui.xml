@@ -16,6 +16,12 @@
 			<span class="button marginLeft10">
 				<g:Button ui:field="addDropSet">Add Dropset Sequence</g:Button>
 			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="save">Save</g:Button>
+			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</span>
 		</div>
 		<g:HTMLPanel ui:field="workouts"/>
 	</g:HTMLPanel>

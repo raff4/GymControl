@@ -25,7 +25,7 @@ CREATE TABLE workout_cardio (
 	PRIMARY KEY (id),
 	INDEX workout_cardio_userid_idx (userid),
 	FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE
-) ENGINE=INNODB;
+);
 
 CREATE TABLE workout_regular (
 	id int(11) NOT NULL AUTO_INCREMENT,
@@ -37,7 +37,7 @@ CREATE TABLE workout_regular (
 	PRIMARY KEY (id),
 	INDEX workout_regular_userid_idx (userid),
 	FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE
-) ENGINE=INNODB;
+);
 
 CREATE TABLE workout_dropset (
 	id int(11) NOT NULL AUTO_INCREMENT,
@@ -46,7 +46,7 @@ CREATE TABLE workout_dropset (
 	PRIMARY KEY (id),
 	INDEX workout_dropset_userid_idx (userid),
 	FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE
-) ENGINE=INNODB;
+);
 
 CREATE TABLE workout_dropset_set (
 	id int(11),
@@ -55,7 +55,7 @@ CREATE TABLE workout_dropset_set (
 	weight SMALLINT UNSIGNED,
 	INDEX dropsetid_idx (dropsetid),
 	FOREIGN KEY (dropsetid) REFERENCES workout_dropset(id) ON DELETE CASCADE
-) ENGINE=INNODB;
+);
 --rollback DROP TABLE IF EXISTS workout_cardio;
 --rollback DROP TABLE IF EXISTS workout_regular;
 --rollback DROP TABLE IF EXISTS workout_dropset_set;

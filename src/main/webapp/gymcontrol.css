@@ -110,10 +110,18 @@ input {
 	width: 200px
 }
 
+.width300 {
+	width: 300px
+}
+
 .height120 {
 	height: 120px;
 }
 
 .height150 {
 	height: 150px;
+}
+
+.height400 {
+	height: 400px;
 }

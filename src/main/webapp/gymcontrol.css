@@ -1,3 +1,13 @@
+.centeredDiv {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
 input {
 	border: 1px solid gray;
 	border-radius: 7px;
@@ -46,6 +56,7 @@ input {
 }
 
 .box {
+	border: 1px solid gray;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	border-radius: 10px 10px 10px 10px;
@@ -79,10 +90,30 @@ input {
 	margin-left: 10px;
 }
 
+.marginTop10 {
+	margin-top: 10px;
+}
+
 .padding5 {
 	padding: 5px;
 }
 
+.padding10 {
+	padding: 10px;
+}
+
 .width25 {
 	width: 25px;
+}
+
+.width200 {
+	width: 200px
+}
+
+.height120 {
+	height: 120px;
+}
+
+.height150 {
+	height: 150px;
 }

@@ -9,4 +9,8 @@
     <tagDatabase tag="initial"/>
   </changeSet>
   <include file="bootstrap.sql" relativeToChangelogFile="true"/>
+  <changeSet author="Vitor Bertazoli" id="2">
+    <tagDatabase tag="release1"/>
+  </changeSet>
+  <include file="release1/release1.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

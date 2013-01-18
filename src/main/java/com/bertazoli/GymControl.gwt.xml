@@ -23,6 +23,11 @@
 	<source path='client'/>
 	<source path='server'/>
 	<source path='shared'/>
+	
+    <extend-property name="locale" values="en_CA"/>
+    <extend-property name="locale" values="pt_BR"/>
+    <set-property-fallback name="locale" value="en_CA"/>
+    <set-property name="locale" value="en_CA,pt_BR"/>
 
 	<define-configuration-property name='gin.ginjector' is-multi-valued='false' />
 	<set-configuration-property name='gin.ginjector' value='com.bertazoli.client.gin.ClientGinjector' />

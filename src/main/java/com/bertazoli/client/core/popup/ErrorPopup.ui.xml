@@ -5,9 +5,13 @@
 	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
-	
 	<g:HTMLPanel>
-		<g:InlineLabel ui:field="error"></g:InlineLabel>
+		<g:Label ui:field="error"></g:Label>
+		<div class="alignCenter marginTop10">
+			<span class="button">
+				<g:Button ui:field="close"><ui:msg description="close">Close</ui:msg></g:Button>
+			</span>
+		</div>
 	</g:HTMLPanel>
 	
 </ui:UiBinder>

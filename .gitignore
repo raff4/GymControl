@@ -1,6 +1,8 @@
 # remove maven output files
 target/
 *.class
+.factorypath
+apt-generated/
 
 # Eclipse junk
 .settings/

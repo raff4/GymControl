@@ -10,6 +10,8 @@ import com.bertazoli.client.custom.CustomView;
 import com.bertazoli.client.gatekeeper.LoggedInGatekeeper;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.WorkoutCardioServiceAsync;
+import com.bertazoli.client.rpc.WorkoutServiceAsync;
+import com.bertazoli.shared.beans.Workout;
 import com.bertazoli.shared.beans.WorkoutCardio;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -45,15 +47,15 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
 
     private Provider<CardioWidgetGroup> cardioProvider;
     private Set<CardioWidgetGroup> cardioList = new HashSet<CardioWidgetGroup>(0);
-    private Provider<WorkoutCardioServiceAsync> workoutCardioProvider;
+    private Provider<WorkoutServiceAsync> workoutProvider;
 
     @Inject
     public WorkoutPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
             Provider<CardioWidgetGroup> cardioProvider,
-            Provider<WorkoutCardioServiceAsync> workoutCardioProvider) {
+            Provider<WorkoutServiceAsync> workoutProvider) {
         super(eventBus, view, proxy);
         this.cardioProvider = cardioProvider;
-        this.workoutCardioProvider = workoutCardioProvider;
+        this.workoutProvider = workoutProvider;
     }
     
     @Override
@@ -93,14 +95,14 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
     }
 
     private void doSave() {
-        Set<WorkoutCardio> list = new HashSet<WorkoutCardio>(0);
+        Workout workout = new Workout();
         for (CardioWidgetGroup item : cardioList) {
-            list.add(item.mapBean());
+            workout.getCardios().add(item.mapBean());
         }
-        WorkoutCardioServiceAsync action = workoutCardioProvider.get();
-        action.addAll(list, new AsyncCallback<Set<WorkoutCardio>>() {
+        WorkoutServiceAsync action = workoutProvider.get();
+        action.add(workout, new AsyncCallback<Workout>() {
             @Override
-            public void onSuccess(Set<WorkoutCardio> result) {
+            public void onSuccess(Workout result) {
                 PlaceRequest request = new PlaceRequest(NameTokens.welcome);
                 placeManager.revealPlace(request);
             }

@@ -26,7 +26,7 @@ public class WorkoutCardio implements IsSerializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userid", nullable=false)
-    private User user;
+    private Workout workout;
 
     public Long getId() {
         return id;
@@ -60,11 +60,11 @@ public class WorkoutCardio implements IsSerializable {
         this.minutes = minutes;
     }
 
-    public User getUser() {
-        return user;
+    public Workout getWorkout() {
+        return workout;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
     }
 }

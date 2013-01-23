@@ -289,7 +289,7 @@
 					<!-- <context>sampledata</context> -->
 					<!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
 					<!-- <clearCheckSums>true</clearCheckSums> -->
-					<rollbackTag>release1</rollbackTag>
+					<rollbackTag>initial</rollbackTag>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -310,7 +310,7 @@
 							<url>jdbc:mysql://bertazoli.com:3306/bertazol_gymcontrol</url>
 							<username>bertazol_gym</username>
 							<password>ta26ti</password>
-							<rollbackTag>release1</rollbackTag>
+							<rollbackTag>initial</rollbackTag>
 						</configuration>
 					</plugin>
 				</plugins>

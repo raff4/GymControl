@@ -5,12 +5,10 @@
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  <include file="initial.sql" relativeToChangelogFile="true"/>
   <changeSet author="Vitor Bertazoli" id="1">
     <tagDatabase tag="initial"/>
   </changeSet>
   <include file="bootstrap.sql" relativeToChangelogFile="true"/>
-  <changeSet author="Vitor Bertazoli" id="2">
-    <tagDatabase tag="release1"/>
-  </changeSet>
   <include file="release1/release1.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

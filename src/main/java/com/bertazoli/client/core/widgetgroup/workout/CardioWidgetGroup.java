@@ -30,7 +30,6 @@ public class CardioWidgetGroup extends Composite implements WidgetGroup<WorkoutC
         cardio.setName(name.getText());
         cardio.setHours(Integer.parseInt(hours.getText()));
         cardio.setMinutes(Integer.parseInt(minutes.getText()));
-        cardio.setUser(securityManager.getUser());
         return cardio;
     }
 

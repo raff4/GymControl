@@ -2,6 +2,7 @@ package com.bertazoli.server.guice;
 
 import com.bertazoli.server.rpc.LoginServiceImpl;
 import com.bertazoli.server.rpc.UserServiceImpl;
+import com.bertazoli.server.rpc.WorkoutCardioServiceImpl;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -19,6 +20,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                     protected void configureServlets() {
                         serve("/gymcontrol/user").with(UserServiceImpl.class);
                         serve("/gymcontrol/login").with(LoginServiceImpl.class);
+                        serve("/gymcontrol/workoutcardio").with(WorkoutCardioServiceImpl.class);
                     }
                 });
     }

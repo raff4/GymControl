@@ -7,22 +7,24 @@
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	ui:generateLocales='default'>
 
-	<g:HTMLPanel>
-	<h1>Create a new account</h1>
-	<g:InlineLabel>Username:</g:InlineLabel><br />
-	<g:TextBox ui:field="username" /><br />
-	<g:InlineLabel>Password:</g:InlineLabel><br />
-	<g:PasswordTextBox ui:field="password" /><br />
-	<g:InlineLabel>Confirm password:</g:InlineLabel><br />
-	<g:PasswordTextBox ui:field="confirmPassword" /><br />
-	<g:InlineLabel>First name:</g:InlineLabel><br />
-	<g:TextBox ui:field="firstname" /><br />
-	<g:InlineLabel>Last name:</g:InlineLabel><br />
-	<g:TextBox ui:field="lastname" /><br />
-	<g:InlineLabel>email:</g:InlineLabel><br />
-	<g:TextBox ui:field="email" /><br />
-	<g:InlineLabel>Date of birth:</g:InlineLabel><br />
-	<d:DateBox ui:field="dob" /><br />
-	<g:Button ui:field="send">Send</g:Button>
+	<g:HTMLPanel styleName="centeredDiv box gradientBackground2 width300 height400 padding5">
+		<h1>Create a new account</h1>
+		<g:Label>Username:</g:Label>
+		<g:TextBox ui:field="username" />
+		<g:Label>Password:</g:Label>
+		<g:PasswordTextBox ui:field="password" />
+		<g:Label>Confirm password:</g:Label>
+		<g:PasswordTextBox ui:field="confirmPassword" />
+		<g:Label>First name:</g:Label>
+		<g:TextBox ui:field="firstname" />
+		<g:Label>Last name:</g:Label>
+		<g:TextBox ui:field="lastname" />
+		<g:Label>email:</g:Label>
+		<g:TextBox ui:field="email" />
+		<g:Label>Date of birth:</g:Label>
+		<d:DateBox ui:field="dob" />
+		<span class="button">
+			<g:Button ui:field="send">Send</g:Button>
+		</span>
 	</g:HTMLPanel>
 </ui:UiBinder>

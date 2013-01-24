@@ -1,5 +1,7 @@
 package com.bertazoli.client.core.login;
 
+import com.bertazoli.client.custom.CustomPresenter;
+import com.bertazoli.client.custom.CustomView;
 import com.bertazoli.client.events.LoginAuthenticatedEvent;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.LoginServiceAsync;
@@ -14,8 +16,6 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -24,9 +24,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
+public class LoginPresenter extends CustomPresenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
-    public interface MyView extends View {
+    public interface MyView extends CustomView {
         HasText getUsername();
         HasText getPassword();
         HasClickHandlers getSendButton();
@@ -58,6 +58,12 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
     }
+    
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+        getView().clear();
+    }
 
     @Override
     protected void onBind() {
@@ -83,7 +89,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
                     PlaceRequest placeRequest = new PlaceRequest(NameTokens.welcome);
                     placeManager.revealPlace(placeRequest);
                 } else {
-                    System.out.println("invalid password");
+                    errorPopup.setErrorMessage("Invalid password");
+                    getView().clear();
                 }
             }
         });

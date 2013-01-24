@@ -12,6 +12,7 @@ import com.google.gwt.inject.client.Ginjector;
 import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.bertazoli.client.core.signup.SignupPresenter;
+import com.bertazoli.client.core.workout.WorkoutPresenter;
 
 @GinModules({ DispatchAsyncModule.class, ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -23,4 +24,5 @@ public interface ClientGinjector extends Ginjector {
     AsyncProvider<FooterPresenter> getFooterPresenter();
     AsyncProvider<LoginPresenter> getLoginPresenter();
     AsyncProvider<SignupPresenter> getSignupPresenter();
+    AsyncProvider<WorkoutPresenter> getWorkoutPresenter();
 }

@@ -1,21 +1,23 @@
 package com.bertazoli.client.manager;
 
+import com.bertazoli.shared.beans.User;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class SecurityManager {
-    private boolean isUserLoggedIn = false;
+    private User user;
     
-    public boolean validateUsernamePassword(String username, String password) {
-        return true;
+    @Inject
+    public SecurityManager() {
+        System.out.println("creating security manager");
     }
 
-    public boolean isUserLoggedIn() {
-        return isUserLoggedIn;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserLoggedIn(boolean isUserLoggedIn) {
-        this.isUserLoggedIn = isUserLoggedIn;
-        
+    public void setUser(User user) {
+        this.user = user;
     }
 }

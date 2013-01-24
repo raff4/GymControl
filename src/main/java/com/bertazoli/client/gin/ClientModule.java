@@ -17,6 +17,8 @@ import com.bertazoli.client.place.NameTokens;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.bertazoli.client.core.workout.WorkoutPresenter;
+import com.bertazoli.client.core.workout.WorkoutView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -30,5 +32,7 @@ public class ClientModule extends AbstractPresenterModule {
         bindPresenterWidget(FooterPresenter.class, FooterPresenter.MyView.class, FooterView.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
         bindPresenter(SignupPresenter.class, SignupPresenter.MyView.class, SignupView.class, SignupPresenter.MyProxy.class);
+
+        bindPresenter(WorkoutPresenter.class, WorkoutPresenter.MyView.class, WorkoutView.class, WorkoutPresenter.MyProxy.class);
     }
 }

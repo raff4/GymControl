@@ -45,4 +45,11 @@ public class LoginView extends ViewImpl implements LoginPresenter.MyView {
     public HasClickHandlers getSendButton() {
         return send;
     }
+
+    @Override
+    public void clear() {
+        username.setText(null);
+        password.setText(null);
+        send.setFocus(true);
+    }
 }

@@ -3,6 +3,7 @@ package com.bertazoli.server.actionvalidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bertazoli.shared.beans.User;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.dispatch.server.actionvalidator.ActionValidator;
@@ -23,8 +24,8 @@ public class LoggedInActionValidator implements ActionValidator {
     public boolean isValid(Action<? extends Result> action) throws ActionException {
         boolean result = true;
         HttpSession session = requestProvider.get().getSession();
-        Object authenticated = session.getAttribute("login.authenticated");
-        if (authenticated == null) {
+        User user = (User)session.getAttribute("user");
+        if (user == null) {
             result = false;
         }
         return result;

@@ -6,11 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.sf.gilead.pojo.java5.LightEntity;
-
 @Entity
 @Table(name="workout_dropset_set")
-public class WorkoutDropSetSet extends LightEntity implements Serializable {
+public class WorkoutDropSetSet implements Serializable {
 
     @Id
     private Long id;

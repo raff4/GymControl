@@ -12,12 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import net.sf.gilead.pojo.java5.legacy.LightEntity;
-
 
 @Entity
 @Table(name="workout")
-public class Workout extends LightEntity implements Serializable {
+public class Workout implements Serializable {
 	
 	@Id
 	@GeneratedValue

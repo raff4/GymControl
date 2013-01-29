@@ -7,11 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.sf.gilead.pojo.java5.LightEntity;
-
 @Entity
 @Table(name="workout_regular")
-public class WorkoutRegular extends LightEntity implements Serializable {
+public class WorkoutRegular implements Serializable {
     
     @Id
     @GeneratedValue

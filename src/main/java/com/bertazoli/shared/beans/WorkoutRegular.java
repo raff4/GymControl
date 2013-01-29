@@ -1,13 +1,17 @@
 package com.bertazoli.shared.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import net.sf.gilead.pojo.java5.LightEntity;
+
 @Entity
 @Table(name="workout_regular")
-public class WorkoutRegular {
+public class WorkoutRegular extends LightEntity implements Serializable {
     
     @Id
     @GeneratedValue

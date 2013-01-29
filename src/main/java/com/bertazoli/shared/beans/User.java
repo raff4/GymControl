@@ -1,23 +1,20 @@
 package com.bertazoli.shared.beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import net.sf.gilead.pojo.java5.LightEntity;
 
 @Entity
 @Table(name="user")
-public class User implements IsSerializable {
+public class User extends LightEntity implements Serializable {
     
     @Id
     @GeneratedValue

@@ -7,7 +7,6 @@ apt-generated/
 # Eclipse junk
 .settings/
 .settings/*
-src/main/webapp/WEB-INF/lib
 .classpath
 .project
 .externalToolBuilders/

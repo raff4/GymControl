@@ -1,14 +1,16 @@
 package com.bertazoli.shared.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+import net.sf.gilead.pojo.java5.LightEntity;
 
 @Entity
 @Table(name="workout_dropset_set")
-public class WorkoutDropSetSet implements IsSerializable {
+public class WorkoutDropSetSet extends LightEntity implements Serializable {
 
     @Id
     private Long id;

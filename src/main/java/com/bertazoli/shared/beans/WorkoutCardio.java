@@ -1,7 +1,5 @@
 package com.bertazoli.shared.beans;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,9 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name="workout_cardio")
-public class WorkoutCardio implements Serializable {
+public class WorkoutCardio implements IsSerializable {
     
     @Id
     @GeneratedValue

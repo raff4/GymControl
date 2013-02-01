@@ -1,15 +1,15 @@
 package com.bertazoli.shared.beans;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name="workout_regular")
-public class WorkoutRegular implements Serializable {
+public class WorkoutRegular implements IsSerializable {
     
     @Id
     @GeneratedValue

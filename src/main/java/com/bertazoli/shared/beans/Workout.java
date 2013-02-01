@@ -1,6 +1,5 @@
 package com.bertazoli.shared.beans;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,10 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 
 @Entity
 @Table(name="workout")
-public class Workout implements Serializable {
+public class Workout implements IsSerializable {
 	
 	@Id
 	@GeneratedValue

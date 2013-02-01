@@ -1,6 +1,5 @@
 package com.bertazoli.shared.beans;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name="workout_dropset")
-public class WorkoutDropSet implements Serializable {
+public class WorkoutDropSet implements IsSerializable {
     
     @Id
     @GeneratedValue

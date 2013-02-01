@@ -1,6 +1,5 @@
 package com.bertazoli.shared.beans;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -10,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import net.sf.gilead.pojo.java5.LightEntity;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 @Entity
 @Table(name="user")
-public class User extends LightEntity implements Serializable {
+public class User implements IsSerializable {
     
     @Id
     @GeneratedValue

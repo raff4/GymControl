@@ -15,8 +15,8 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
     private UserBusinessLogic userBusinessLogic;
     
     @Inject
-    public UserServiceImpl() {
-
+    public UserServiceImpl(UserBusinessLogic userBusinessLogic) {
+        this.userBusinessLogic = userBusinessLogic;
     }
 
     @Override

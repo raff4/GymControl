@@ -52,4 +52,9 @@ public class LoginView extends ViewImpl implements LoginPresenter.MyView {
         password.setText(null);
         send.setFocus(true);
     }
+
+    @Override
+    public boolean validate() {
+        return true;
+    }
 }

@@ -3,6 +3,6 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with type="com.bertazoli.client.place.NameTokens" field="nameTokens"></ui:with>
   <g:HTMLPanel>
-    <g:InlineHyperlink targetHistoryToken="{nameTokens.getWorkout}" styleName="menuItem">Add Workout</g:InlineHyperlink> 
+    <g:InlineHyperlink targetHistoryToken="{nameTokens.getWorkout}" styleName="menuItem">Add New Workout</g:InlineHyperlink> 
   </g:HTMLPanel>
 </ui:UiBinder> 

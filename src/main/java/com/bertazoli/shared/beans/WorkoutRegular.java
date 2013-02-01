@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 @Entity
 @Table(name="workout_regular")
-public class WorkoutRegular {
+public class WorkoutRegular implements IsSerializable {
     
     @Id
     @GeneratedValue

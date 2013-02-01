@@ -31,11 +31,18 @@ public class LoggedInGatekeeper implements Gatekeeper {
 
     @Override
     public boolean canReveal() {
-        boolean loggedIn = false;
-        if (user != null) {
-            loggedIn = user.isLoggedIn();
+        if (securityManager.getUser() != null) {
+            if (securityManager.getUser().isLoggedIn() == true) {
+                return true;
+            }
         }
-        return loggedIn;
+        
+        if (user != null) {
+            if (user.isLoggedIn() == true) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

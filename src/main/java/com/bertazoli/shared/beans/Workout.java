@@ -1,19 +1,17 @@
 package com.bertazoli.shared.beans;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+
 
 @Entity
 @Table(name="workout")
@@ -22,9 +20,11 @@ public class Workout implements IsSerializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	private Long userId;
+	private String name;
 	private Date day;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="id")
+	
+	@Transient
 	private Set<WorkoutCardio> cardios = new HashSet<WorkoutCardio>(0);
 
 	public Long getId() {
@@ -35,7 +35,15 @@ public class Workout implements IsSerializable {
 		this.id = id;
 	}
 
-	public Date getDay() {
+	public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Date getDay() {
 		return day;
 	}
 
@@ -50,4 +58,12 @@ public class Workout implements IsSerializable {
 	public void setCardios(Set<WorkoutCardio> cardios) {
 		this.cardios = cardios;
 	}
+
+	public String getName() {
+	    return name;
+	}
+	
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -10,6 +10,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserServiceImpl extends RemoteServiceServlet implements UserService {
 
+
     private static final long serialVersionUID = -4535892596594422411L;
     private UserBusinessLogic userBusinessLogic;
     

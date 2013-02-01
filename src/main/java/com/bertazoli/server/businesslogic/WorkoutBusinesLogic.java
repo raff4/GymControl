@@ -5,6 +5,7 @@ import org.hibernate.Session;
 
 import com.bertazoli.server.hibernate.HibernateUtil;
 import com.bertazoli.shared.beans.Workout;
+import com.bertazoli.shared.beans.WorkoutCardio;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -21,7 +22,14 @@ public class WorkoutBusinesLogic {
         try {
             session.beginTransaction();
             session.save(workout);
+            
+            for (WorkoutCardio cardio : workout.getCardios()) {
+                cardio.setWorkoutId(workout.getId());
+                session.save(cardio);
+            }
+            
             session.getTransaction().commit();
+            
         } catch (HibernateException e) {
             session.getTransaction().rollback();
         }

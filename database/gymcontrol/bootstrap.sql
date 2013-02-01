@@ -4,6 +4,7 @@
 CREATE TABLE workout (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	userid int(11) NOT NULL,
+	name varchar(45),
 	day date,
 	PRIMARY KEY (id),
 	FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE

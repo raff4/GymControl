@@ -1,15 +1,10 @@
 package com.bertazoli.shared.beans;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,25 +18,18 @@ public class User implements IsSerializable {
     @GeneratedValue
     private Long id;
     
-    @Column(name="firstname")
     private String firstName;
     
-    @Column(name="lastname")
     private String lastName;
     
-    @Column(name="username")
     private String username;
     
-    @Column(name="email")
     private String email;
     
-    @Column(name="dob")
     private Timestamp dob;
     
-    @Column(name="salt")
     private String salt;
     
-    @Column(name="password")
     private String password;
 
     @Transient

@@ -13,6 +13,6 @@
 		<g:TextBox ui:field="hours" styleName="width25" maxLength="2"/>
 		<g:InlineLabel>Minutes:</g:InlineLabel>
 		<g:TextBox ui:field="minutes" styleName="width25" maxLength="2"/>
-		<g:Image ui:field="delete" styleName="marginLeft10" url="images/delete.png"/>
+		<g:Image ui:field="delete" styleName="marginLeft10 pointer" url="images/delete.png"/>
 	</g:HTMLPanel>
 </ui:UiBinder>

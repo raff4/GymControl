@@ -62,6 +62,21 @@ input {
 	border-radius: 10px 10px 10px 10px;
 }
 
+.box5 {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.error {
+	background-color: red;
+	position: absolute;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
 .alignCenter {
 	text-align: center;
 }
@@ -92,6 +107,10 @@ input {
 
 .marginTop10 {
 	margin-top: 10px;
+}
+
+.padding3 {
+	padding: 3px;
 }
 
 .padding5 {

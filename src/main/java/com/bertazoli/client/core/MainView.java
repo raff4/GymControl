@@ -48,4 +48,14 @@ public class MainView extends ViewImpl implements MainPresenter.MyView {
     public HTMLPanel getMenuPanel() {
         return menu;
     }
+
+    @Override
+    public void clear() {
+        content.clear();
+    }
+
+    @Override
+    public boolean validate() {
+        return true;
+    }
 }

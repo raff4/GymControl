@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.bertazoli.client.core.MainPresenter;
 import com.bertazoli.client.core.widgetgroup.workout.CardioWidgetGroup;
+import com.bertazoli.client.core.widgetgroup.workout.RegularWidgetGroup;
 import com.bertazoli.client.custom.CustomPresenter;
 import com.bertazoli.client.custom.CustomView;
 import com.bertazoli.client.gatekeeper.LoggedInGatekeeper;
@@ -19,6 +20,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -48,27 +50,35 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
     }
     
     public interface DeleteHandler {
-        public void onDelete(CardioWidgetGroup widget);
+        public void onDelete(Widget widget);
     }
 
     private Provider<CardioWidgetGroup> cardioProvider;
+    private Provider<RegularWidgetGroup> regularProvider;
     private Set<CardioWidgetGroup> cardioList = new HashSet<CardioWidgetGroup>(0);
+    private Set<RegularWidgetGroup> regularList = new HashSet<RegularWidgetGroup>(0);
     private Provider<WorkoutServiceAsync> workoutProvider;
     private DeleteHandler deleteHandler;
 
     @Inject
     public WorkoutPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
             Provider<CardioWidgetGroup> cardioProvider,
+            Provider<RegularWidgetGroup> regularProvider,
             Provider<WorkoutServiceAsync> workoutProvider) {
         super(eventBus, view, proxy);
         this.cardioProvider = cardioProvider;
+        this.regularProvider = regularProvider;
         this.workoutProvider = workoutProvider;
         
         this.deleteHandler = new DeleteHandler() {
             
             @Override
-            public void onDelete(CardioWidgetGroup widget) {
-                cardioList.remove(widget);
+            public void onDelete(Widget widget) {
+                if (widget instanceof CardioWidgetGroup) {
+                    cardioList.remove(widget);
+                } else if (widget instanceof RegularWidgetGroup) {
+                    regularList.remove(widget);
+                }
                 getView().getWorkoutsPanel().remove(widget);
             }
         };
@@ -92,6 +102,20 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
             @Override
             public void onClick(ClickEvent event) {
                 addCardio();
+            }
+        }));
+        
+        registerHandler(getView().getAddDropSetButton().addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                addDropSet();
+            }
+        }));
+        
+        registerHandler(getView().getAddRegularButton().addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                addRegular();
             }
         }));
         
@@ -142,5 +166,16 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
         getView().getWorkoutsPanel().add(cardio);
         cardio.setDeleteHandler(deleteHandler);
         cardioList.add(cardio);
+    }
+
+    protected void addRegular() {
+        RegularWidgetGroup regular = regularProvider.get();
+        getView().getWorkoutsPanel().add(regular);
+        regular.setDeleteHandler(deleteHandler);
+        regularList.add(regular);
+    }
+
+    protected void addDropSet() {
+        
     }
 }

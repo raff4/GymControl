@@ -2,6 +2,7 @@ package com.bertazoli.client.core.workout;
 
 import java.util.Date;
 
+import com.bertazoli.client.core.constants.Dictionary;
 import com.bertazoli.client.core.fields.FormDateBox;
 import com.bertazoli.client.core.validation.ValidationManager;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -33,7 +34,9 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     private ValidationManager validationManager;
 
     @Inject
-    public WorkoutView(final Binder binder, ValidationManager validationManager) {
+    public WorkoutView(final Binder binder,
+            ValidationManager validationManager,
+            Dictionary dictionary) {
         widget = binder.createAndBindUi(this);
         this.validationManager = validationManager;
     }
@@ -92,6 +95,6 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     public boolean validate() {
         validationManager.reset();
         
-        return validationManager.hasErrors();
+        return !validationManager.hasErrors();
     }
 }

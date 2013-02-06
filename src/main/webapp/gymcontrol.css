@@ -77,6 +77,17 @@ input {
 	cursor: pointer;
 }
 
+.relative {
+	position: relative;
+}
+
+.delete {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: 10px;
+}
+
 .alignCenter {
 	text-align: center;
 }

@@ -1,30 +1,27 @@
 package com.bertazoli.client.core.validation;
 
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ErrorPopup {
-    private PopupPanel popupPanel = null;
+public class ErrorPopup extends PopupPanel {
+    private String message;
+    private Widget field;
 
-    public void setErrorMessage(String errorMessage, Widget widget) {
-        popupPanel = new PopupPanel(false);
-        showError(errorMessage, widget);
+    public void setErrorMessage(String message) {
+        this.message = message;
     }
 
-    public void showError(String errorMessage, Widget widget) {
-        if (popupPanel != null) {
-            popupPanel.setStyleName("error");
-            HTML html = new HTML(errorMessage, true);
-            popupPanel.add(html);
-            
-            popupPanel.setPopupPosition(widget.getAbsoluteLeft()+widget.getOffsetWidth(), widget.getAbsoluteTop());
-        }
+    public void setPosition(Widget field) {
+        this.field = field;
     }
 
-    public void hide() {
-        if (popupPanel != null) {
-            popupPanel.hide();
-        }
+    public void displayError() {
+        clear();
+        HTMLPanel div = new HTMLPanel(message);
+        setStyleName("error box paddingLeft10 paddingRight10");
+        add(div);
+        setPopupPosition(field.getAbsoluteLeft() + field.getOffsetWidth(), field.getAbsoluteTop());
+        show();
     }
 }

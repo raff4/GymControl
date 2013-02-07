@@ -10,7 +10,7 @@
 	<g:HTMLPanel>
 		<div>
 			<g:TextBox ui:field="workoutName" />
-			<f:FormDateBox ui:field="workoutDate" />
+			<d:DateBox ui:field="workoutDate" />
 			<span class="button">
 				<g:Button ui:field="addCardio">Add Cardio</g:Button>
 			</span>

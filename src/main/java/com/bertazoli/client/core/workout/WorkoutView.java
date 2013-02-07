@@ -3,7 +3,7 @@ package com.bertazoli.client.core.workout;
 import java.util.Date;
 
 import com.bertazoli.client.core.constants.Dictionary;
-import com.bertazoli.client.core.fields.FormDateBox;
+import com.bertazoli.client.core.fields.DateField;
 import com.bertazoli.client.core.validation.ValidationManager;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -13,7 +13,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
@@ -30,15 +32,21 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     @UiField Button cancel;
     @UiField HTMLPanel workouts;
     @UiField TextBox workoutName;
-    @UiField FormDateBox workoutDate;
+    @UiField DateBox workoutDate;
+    private DateField workoutDateField;
     private ValidationManager validationManager;
 
     @Inject
     public WorkoutView(final Binder binder,
             ValidationManager validationManager,
+            Provider<DateField> dateFieldProvider,
             Dictionary dictionary) {
         widget = binder.createAndBindUi(this);
         this.validationManager = validationManager;
+        
+        this.workoutDateField = dateFieldProvider.get();
+        
+        this.workoutDateField.setField(workoutDate);
     }
 
     @Override
@@ -94,6 +102,10 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
     @Override
     public boolean validate() {
         validationManager.reset();
+        
+        validationManager.addValidationResult(workoutDateField.validate());
+        
+        validationManager.displayErrors();
         
         return !validationManager.hasErrors();
     }

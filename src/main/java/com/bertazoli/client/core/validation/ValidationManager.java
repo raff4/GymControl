@@ -8,14 +8,14 @@ import com.google.inject.Singleton;
 public class ValidationManager {
     
     private ArrayList<ValidationResult> results = new ArrayList<ValidationResult>();
-    private ArrayList<ValidationAction> actions = new ArrayList<ValidationAction>();
     
     public void reset() {
         for (ValidationResult result : results) {
-            if (result.getErrorPopup() != null) {
-                result.getErrorPopup().hide();
+            if (result != null && result.isError()) {
+                result.clear();
             }
         }
+        results.clear();
     }
 
     public void add(ValidationResult validationResult) {
@@ -31,26 +31,16 @@ public class ValidationManager {
     public void displayErrors() {
         if (results.size() > 0) {
             for (ValidationResult result : results) {
-                showError(result);
+                if (result.isError()) {
+                    result.showError();
+                }
             }
         }
     }
 
-    private void showError(ValidationResult result) {
-        if (result.getErrorPopup() == null) {
-            ErrorPopup errorPopup = new ErrorPopup();
-            errorPopup.setErrorMessage(result.getErrorMessage(), result.getWidget());
-            result.setErrorPopup(errorPopup);
-        } else {
-            result.getErrorPopup().setErrorMessage(result.getErrorMessage(), result.getWidget());
-        }
-    }
-    
-    public void doActions() {
-        for (ValidationResult result : results) {
-            for (ValidationAction action : actions) {
-                action.execute(result.getWidget());
-            }
+    public void addValidationResult(ValidationResult result) {
+        if (result != null) {
+            results.add(result);
         }
     }
 }

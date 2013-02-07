@@ -12,12 +12,10 @@ import com.bertazoli.client.custom.CustomView;
 import com.bertazoli.client.gatekeeper.LoggedInGatekeeper;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.WorkoutServiceAsync;
-import com.bertazoli.shared.beans.Workout;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -135,6 +133,8 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
     }
 
     private void doSave() {
+        getView().validate();
+        /*
         if (getView().validate()) {
             Workout workout = new Workout();
             workout.setDay(getView().getWorkoutDate());
@@ -159,6 +159,7 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
                 }
             });
         }
+        */
     }
 
     private void addCardio() {

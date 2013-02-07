@@ -4,28 +4,40 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ValidationResult {
     
-    private String errorMessage = null;
+    private boolean error = false;
+    private Widget field;
+    private String message;
     private ErrorPopup errorPopup;
-    private Widget widget;
     
-    public ValidationResult(String errorMessage, Widget widget) {
-        this.errorMessage = errorMessage;
-        this.widget = widget;
+    public void clear() {
+        error = false;
+        message = "";
+        field = null;
+        
+        if (errorPopup != null) {
+            errorPopup.hide();
+        }
     }
 
-    public ErrorPopup getErrorPopup() {
-        return errorPopup;
+    public void setError(Widget field, String message) {
+        error = true;
+        this.field = field;
+        this.message = message;
+        
+        if (errorPopup == null) {
+            errorPopup = new ErrorPopup();
+        }
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public boolean isError() {
+        return error;
     }
-
-    public Widget getWidget() {
-        return widget;
-    }
-
-    public void setErrorPopup(ErrorPopup errorPopup) {
-        this.errorPopup = errorPopup;
+    
+    public void showError() {
+        if (errorPopup != null) {
+            errorPopup.setErrorMessage(message);
+            errorPopup.setPosition(field);
+            errorPopup.displayError();
+        }
     }
 }

@@ -26,6 +26,9 @@ public class Workout implements IsSerializable {
 	
 	@Transient
 	private Set<WorkoutCardio> cardios = new HashSet<WorkoutCardio>(0);
+	
+	@Transient
+	private Set<WorkoutRegular> regulars = new HashSet<WorkoutRegular>(0);
 
 	public Long getId() {
 		return id;
@@ -65,5 +68,13 @@ public class Workout implements IsSerializable {
 	
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<WorkoutRegular> getRegulars() {
+        return regulars;
+    }
+
+    public void setRegulars(Set<WorkoutRegular> regulars) {
+        this.regulars = regulars;
     }
 }

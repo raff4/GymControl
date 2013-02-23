@@ -40,4 +40,8 @@ public class ValidationResult {
             errorPopup.displayError();
         }
     }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
 }

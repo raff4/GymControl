@@ -7,14 +7,16 @@
 	ui:generateLocales='default'>
 	<ui:with type="com.bertazoli.client.place.NameTokens" field="nametokens"></ui:with>
 
-	<g:HTMLPanel styleName="centeredDiv width200 height120 padding5 box gradientBackground2">
-		<g:InlineLabel>Username:</g:InlineLabel>
-		<g:TextBox ui:field="username"/>
-		<g:InlineLabel>Password:</g:InlineLabel>
-		<g:PasswordTextBox ui:field="password"/>
-		<span class="button">
-			<g:Button ui:field="send">Send</g:Button>
-		</span><br />
-		<span>Don't have an account? <g:InlineHyperlink targetHistoryToken="{nametokens.getSignup}">Sign Up</g:InlineHyperlink></span>
-	</g:HTMLPanel>
+	<g:FocusPanel ui:field="focusPanel">
+		<g:HTMLPanel styleName="centeredDiv width200 height120 padding5 box gradientBackground2">
+			<g:InlineLabel>Username:</g:InlineLabel>
+			<g:TextBox ui:field="username"/>
+			<g:InlineLabel>Password:</g:InlineLabel>
+			<g:PasswordTextBox ui:field="password"/>
+			<span class="button">
+				<g:Button ui:field="send">Send</g:Button>
+			</span><br />
+			<span>Don't have an account? <g:InlineHyperlink targetHistoryToken="{nametokens.getSignup}">Sign Up</g:InlineHyperlink></span>
+		</g:HTMLPanel>
+	</g:FocusPanel>
 </ui:UiBinder>

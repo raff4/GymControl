@@ -10,7 +10,7 @@
 		<g:InlineLabel>Name:</g:InlineLabel>
 		<g:TextBox ui:field="name"/>
 		<g:InlineLabel>Weight:</g:InlineLabel>
-		<g:TextBox ui:field="weight" styleName="width25" maxLength="2"/>
+		<g:TextBox ui:field="weight" styleName="width50" maxLength="4"/>
 		<g:InlineLabel>Sets:</g:InlineLabel>
 		<g:TextBox ui:field="sets" styleName="width25" maxLength="2"/>
 		<g:InlineLabel>Repetitions:</g:InlineLabel>

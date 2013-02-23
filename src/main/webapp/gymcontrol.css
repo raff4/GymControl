@@ -11,6 +11,7 @@
 input {
 	border: 1px solid gray;
 	border-radius: 7px;
+	padding-left: 10px !important;
 }
 
 .button button {
@@ -141,6 +142,13 @@ input {
 
 .width25 {
 	width: 25px;
+}
+
+.width50 {
+	width: 50px;
+}
+.width100 {
+	width: 100px;
 }
 
 .width200 {

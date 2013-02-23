@@ -25,7 +25,12 @@ public class ValidationManager {
     }
 
     public boolean hasErrors() {
-        return results.size() > 0;
+        for (ValidationResult result : results) {
+            if (result.isError()) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public void displayErrors() {

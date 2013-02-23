@@ -15,6 +15,8 @@ public class WorkoutRegular implements IsSerializable {
     @GeneratedValue
     private Long id;
     
+    private Long workoutId;
+    
     private String name;
     
     private Integer weight;
@@ -61,5 +63,13 @@ public class WorkoutRegular implements IsSerializable {
 
     public void setRepetitions(Integer repetitions) {
         this.repetitions = repetitions;
+    }
+
+    public Long getWorkoutId() {
+        return workoutId;
+    }
+
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
     }
 }

@@ -9,8 +9,14 @@
 
 	<g:HTMLPanel>
 		<div>
+			<g:InlineLabel>
+				<ui:msg description="workoutName">Workout Name</ui:msg>:
+			</g:InlineLabel>
 			<g:TextBox ui:field="workoutName" />
-			<d:DateBox ui:field="workoutDate" />
+			<g:InlineLabel>
+				<ui:msg description="workoutDate">Workout Date</ui:msg>:
+			</g:InlineLabel>
+			<d:DateBox ui:field="workoutDate" styleName="width100"/>
 			<span class="button">
 				<g:Button ui:field="addCardio">Add Cardio</g:Button>
 			</span>

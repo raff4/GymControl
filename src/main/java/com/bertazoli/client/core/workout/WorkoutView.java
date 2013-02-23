@@ -44,9 +44,8 @@ public class WorkoutView extends ViewImpl implements WorkoutPresenter.MyView {
         widget = binder.createAndBindUi(this);
         this.validationManager = validationManager;
         
-        this.workoutDateField = dateFieldProvider.get();
-        
-        this.workoutDateField.setField(workoutDate);
+        workoutDateField = dateFieldProvider.get();
+        workoutDateField.setField(workoutDate, false);
     }
 
     @Override

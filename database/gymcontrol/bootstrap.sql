@@ -43,10 +43,12 @@ CREATE TABLE workout_dropset (
 );
 
 CREATE TABLE workout_dropset_set (
-	id int(11),
+	id int(11) NOT NULL AUTO_INCREMENT,
 	dropsetid int(11) NOT NULL,
-	sets TINYINT UNSIGNED,
 	weight SMALLINT UNSIGNED,
+	sets TINYINT UNSIGNED,
+	repetitions TINYINT UNSIGNED,
+	PRIMARY KEY (id),
 	INDEX dropsetid_idx (dropsetid),
 	FOREIGN KEY (dropsetid) REFERENCES workout_dropset(id) ON DELETE CASCADE
 );

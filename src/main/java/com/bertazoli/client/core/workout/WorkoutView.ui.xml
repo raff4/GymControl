@@ -8,23 +8,29 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel>
-		<div>
-			<g:InlineLabel>
-				<ui:msg description="workoutName">Workout Name</ui:msg>:
-			</g:InlineLabel>
-			<g:TextBox ui:field="workoutName" />
-			<g:InlineLabel>
-				<ui:msg description="workoutDate">Workout Date</ui:msg>:
-			</g:InlineLabel>
-			<d:DateBox ui:field="workoutDate" styleName="width100"/>
+		<div class="marginBottom2">
+			<div class="minWidth600">
+				<g:InlineLabel>
+					<ui:msg description="workoutName">Workout Name</ui:msg>:
+				</g:InlineLabel>
+				<g:TextBox ui:field="workoutName" />
+			</div>
+			
+			<div>
+				<g:InlineLabel>
+					<ui:msg description="workoutDate">Workout Date</ui:msg>:
+				</g:InlineLabel>
+				<d:DateBox ui:field="workoutDate" styleName="width100"/>
+			</div>
+			
 			<span class="button">
 				<g:Button ui:field="addCardio">Add Cardio</g:Button>
 			</span>
 			<span class="button marginLeft10">
-				<g:Button ui:field="addRegular">Add Regular Sequence</g:Button>
+				<g:Button ui:field="addRegular">Add Regular Set</g:Button>
 			</span>
 			<span class="button marginLeft10">
-				<g:Button ui:field="addDropSet">Add Dropset Sequence</g:Button>
+				<g:Button ui:field="addDropSet">Add Dropset</g:Button>
 			</span>
 			<span class="button marginLeft10">
 				<g:Button ui:field="save">Save</g:Button>

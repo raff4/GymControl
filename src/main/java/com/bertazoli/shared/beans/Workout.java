@@ -1,7 +1,7 @@
 package com.bertazoli.shared.beans;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,10 +25,13 @@ public class Workout implements IsSerializable {
 	private Date day;
 	
 	@Transient
-	private Set<WorkoutCardio> cardios = new HashSet<WorkoutCardio>(0);
+	private Set<WorkoutCardio> cardios = new LinkedHashSet<WorkoutCardio>(0);
 	
 	@Transient
-	private Set<WorkoutRegular> regulars = new HashSet<WorkoutRegular>(0);
+	private Set<WorkoutRegular> regulars = new LinkedHashSet<WorkoutRegular>(0);
+	
+	@Transient
+	private Set<WorkoutDropSet> dropsets = new LinkedHashSet<WorkoutDropSet>(0);
 
 	public Long getId() {
 		return id;
@@ -76,5 +79,13 @@ public class Workout implements IsSerializable {
 
     public void setRegulars(Set<WorkoutRegular> regulars) {
         this.regulars = regulars;
+    }
+
+    public Set<WorkoutDropSet> getDropsets() {
+        return dropsets;
+    }
+
+    public void setDropsets(Set<WorkoutDropSet> dropsets) {
+        this.dropsets = dropsets;
     }
 }

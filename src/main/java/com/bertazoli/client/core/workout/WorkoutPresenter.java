@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.bertazoli.client.core.MainPresenter;
 import com.bertazoli.client.core.widgetgroup.workout.CardioWidgetGroup;
+import com.bertazoli.client.core.widgetgroup.workout.DropSetWidgetGroup;
 import com.bertazoli.client.core.widgetgroup.workout.RegularWidgetGroup;
 import com.bertazoli.client.custom.CustomPresenter;
 import com.bertazoli.client.custom.CustomView;
@@ -55,8 +56,10 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
 
     private Provider<CardioWidgetGroup> cardioProvider;
     private Provider<RegularWidgetGroup> regularProvider;
+    private Provider<DropSetWidgetGroup> dropsetProvider;
     private Set<CardioWidgetGroup> cardioList = new HashSet<CardioWidgetGroup>(0);
     private Set<RegularWidgetGroup> regularList = new HashSet<RegularWidgetGroup>(0);
+    private Set<DropSetWidgetGroup> dropsetList = new HashSet<DropSetWidgetGroup>(0);
     private Provider<WorkoutServiceAsync> workoutProvider;
     private DeleteHandler deleteHandler;
 
@@ -64,11 +67,13 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
     public WorkoutPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
             Provider<CardioWidgetGroup> cardioProvider,
             Provider<RegularWidgetGroup> regularProvider,
+            Provider<DropSetWidgetGroup> dropsetProvider,
             Provider<WorkoutServiceAsync> workoutProvider) {
         super(eventBus, view, proxy);
         this.cardioProvider = cardioProvider;
         this.regularProvider = regularProvider;
         this.workoutProvider = workoutProvider;
+        this.dropsetProvider = dropsetProvider;
         
         this.deleteHandler = new DeleteHandler() {
             
@@ -78,6 +83,8 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
                     cardioList.remove(widget);
                 } else if (widget instanceof RegularWidgetGroup) {
                     regularList.remove(widget);
+                } else if (widget instanceof DropSetWidgetGroup) {
+                    dropsetList.remove(widget);
                 }
                 getView().getWorkoutsPanel().remove(widget);
             }
@@ -129,7 +136,7 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
         registerHandler(getView().getCancelButton().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                redirectToHome();
+//                redirectToHome();
             }
         }));
     }
@@ -147,6 +154,10 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
             
             for (RegularWidgetGroup item : regularList) {
                 workout.getRegulars().add(item.mapBean());
+            }
+            
+            for (DropSetWidgetGroup item : dropsetList) {
+                workout.getDropsets().add(item.mapBean());
             }
             
             WorkoutServiceAsync action = workoutProvider.get();
@@ -184,6 +195,9 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
     }
 
     protected void addDropSet() {
-        
+        DropSetWidgetGroup dropset = dropsetProvider.get();
+        getView().getWorkoutsPanel().add(dropset);
+        dropset.setDeleteHandler(deleteHandler);
+        dropsetList.add(dropset);
     }
 }

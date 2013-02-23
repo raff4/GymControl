@@ -3,11 +3,12 @@ package com.bertazoli.client.core.signup;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.bertazoli.client.custom.CustomPresenter;
+import com.bertazoli.client.custom.CustomView;
 import com.bertazoli.client.events.LoginAuthenticatedEvent;
 import com.bertazoli.client.place.NameTokens;
 import com.bertazoli.client.rpc.UserServiceAsync;
 import com.bertazoli.shared.beans.User;
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -21,8 +22,6 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -30,9 +29,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPresenter.MyProxy> {
+public class SignupPresenter extends CustomPresenter<SignupPresenter.MyView, SignupPresenter.MyProxy> {
 
-    public interface MyView extends View {
+    public interface MyView extends CustomView {
         HasText getUsername();
         PasswordTextBox getPassword();
         PasswordTextBox getConfirmPassword();
@@ -41,7 +40,7 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
         HasText getEmail();
         Date getDOB();
         HasClickHandlers getSendButton();
-        void passwordMatch(boolean value);
+        boolean passwordMatch();
     }
 
     @ProxyCodeSplit
@@ -63,6 +62,12 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
+    }
+    
+    @Override
+    protected void onReveal() {
+        super.onReveal();
+        getView().clear();
     }
 
     @Override
@@ -102,33 +107,36 @@ public class SignupPresenter extends Presenter<SignupPresenter.MyView, SignupPre
         }));
     }
     
-    private void validatePassword() {
-        getView().passwordMatch(getView().getPassword().getText().equals(getView().getConfirmPassword().getText()));
+    private boolean validatePassword() {
+        return getView().passwordMatch();
     }
     
     private void doLogin() {
-        UserServiceAsync action = userProvider.get();
-        User user = new User();
-        user.setUsername(getView().getUsername().getText());
-        user.setPassword(getView().getPassword().getText());
-        user.setFirstName(getView().getFirstName().getText());
-        user.setLastName(getView().getLastName().getText());
-        user.setEmail(getView().getEmail().getText());
-        user.setDob(new Timestamp(getView().getDOB().getTime()));
-        action.create(user, new AsyncCallback<User>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                GWT.log("error creating account");
-            }
-
-            @Override
-            public void onSuccess(User result) {
-                if (result != null && result.isLoggedIn()) {
-                    getEventBus().fireEvent(new LoginAuthenticatedEvent(result));
-                    PlaceRequest request = new PlaceRequest(NameTokens.welcome);
-                    placeManager.revealPlace(request);
+        if (getView().validate()) {
+            UserServiceAsync action = userProvider.get();
+            User user = new User();
+            user.setUsername(getView().getUsername().getText());
+            user.setPassword(getView().getPassword().getText());
+            user.setFirstName(getView().getFirstName().getText());
+            user.setLastName(getView().getLastName().getText());
+            user.setEmail(getView().getEmail().getText());
+            user.setDob(new Timestamp(getView().getDOB().getTime()));
+            action.create(user, new AsyncCallback<User>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    errorPopup.setErrorMessage("error creating account");
+                    errorPopup.show();
                 }
-            }
-        });
+
+                @Override
+                public void onSuccess(User result) {
+                    if (result != null && result.isLoggedIn()) {
+                        getEventBus().fireEvent(new LoginAuthenticatedEvent(result));
+                        PlaceRequest request = new PlaceRequest(NameTokens.welcome);
+                        placeManager.revealPlace(request);
+                    }
+                }
+            });
+        }
     }
 }

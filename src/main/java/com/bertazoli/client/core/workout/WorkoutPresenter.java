@@ -129,7 +129,7 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
         registerHandler(getView().getCancelButton().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                errorPopup.setErrorMessage("Something went wrong, Damn!!!");
+                redirectToHome();
             }
         }));
     }
@@ -153,8 +153,7 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
             action.add(workout, new AsyncCallback<Workout>() {
                 @Override
                 public void onSuccess(Workout result) {
-                    PlaceRequest request = new PlaceRequest(NameTokens.welcome);
-                    placeManager.revealPlace(request);
+                    redirectToHome();
                 }
                 
                 @Override
@@ -163,6 +162,11 @@ public class WorkoutPresenter extends CustomPresenter<WorkoutPresenter.MyView, W
                 }
             });
         }
+    }
+    
+    private void redirectToHome() {
+        PlaceRequest request = new PlaceRequest(NameTokens.welcome);
+        placeManager.revealPlace(request);
     }
 
     private void addCardio() {

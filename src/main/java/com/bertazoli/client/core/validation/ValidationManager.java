@@ -11,17 +11,11 @@ public class ValidationManager {
     
     public void reset() {
         for (ValidationResult result : results) {
-            if (result != null && result.isError()) {
+            if (result != null) {
                 result.clear();
             }
         }
         results.clear();
-    }
-
-    public void add(ValidationResult validationResult) {
-        if (validationResult != null) {
-            results.add(validationResult);
-        }
     }
 
     public boolean hasErrors() {

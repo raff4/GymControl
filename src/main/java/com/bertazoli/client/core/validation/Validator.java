@@ -31,6 +31,8 @@ public abstract class Validator {
                     validate();
                     if (validationResult.isError()) {
                         validationResult.showError();
+                    } else {
+                        validationResult.clear();
                     }
                 }
             });

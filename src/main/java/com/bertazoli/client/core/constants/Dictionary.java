@@ -10,6 +10,8 @@ public class Dictionary {
     public static final String EMPTYNOTALLOWED = "Empty not allowed";
 
     public static final String INVALIDEMAIL = "Invalid email";
+
+    public static final String ONLYNUMBERSALLOWED = "Only numbers allowed";
     
     public static String MINLENGTH(Integer minLength) {
         return "Minimum length is " + minLength;

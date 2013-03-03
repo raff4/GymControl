@@ -19,6 +19,7 @@ public class WorkoutDropSet implements IsSerializable {
     @GeneratedValue
     private Long id;
     private Long workoutId;
+    private Integer position;
     private String name;
     
     @Transient
@@ -54,5 +55,13 @@ public class WorkoutDropSet implements IsSerializable {
 
     public void setWorkoutId(Long workoutId) {
         this.workoutId = workoutId;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.bertazoli.client.core.widgetgroup.WidgetGroup;
-import com.bertazoli.client.core.workout.WorkoutPresenter.DeleteHandler;
+import com.bertazoli.client.core.workout.add.WorkoutAddPresenter.DeleteHandler;
 import com.bertazoli.client.manager.SecurityManager;
 import com.bertazoli.shared.beans.WorkoutDropSet;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -90,5 +90,9 @@ public class DropSetWidgetGroup extends Composite implements WidgetGroup<Workout
     
     public void setDeleteHandler(DeleteHandler deleteHandler) {
         this.deleteHandler = deleteHandler;
+    }
+
+    @Override
+    public void validate() {
     }
 }

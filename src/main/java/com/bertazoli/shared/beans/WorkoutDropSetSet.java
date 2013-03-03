@@ -14,13 +14,10 @@ public class WorkoutDropSetSet implements IsSerializable {
     @Id
     @GeneratedValue
     private Long id;
-    
     private Long dropsetId;
-    
+    private Integer position;
     private Integer sets;
-    
     private Integer weight;
-    
     private Integer repetitions;
     
     public Long getId() {
@@ -61,5 +58,13 @@ public class WorkoutDropSetSet implements IsSerializable {
 
     public void setRepetitions(Integer repetitions) {
         this.repetitions = repetitions;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

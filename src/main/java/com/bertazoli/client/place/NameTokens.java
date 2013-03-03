@@ -5,6 +5,7 @@ public class NameTokens {
     public static final String welcome = "welcome";
     public static final String login = "login";
     public static final String signup = "signup";
+    public static final String addworkout = "addworkout";
     public static final String workout = "workout";
 
     public static String getWelcome() {
@@ -17,6 +18,10 @@ public class NameTokens {
 
     public static String getSignup() {
         return signup;
+    }
+
+    public static String getAddWorkout() {
+        return addworkout;
     }
 
     public static String getWorkout() {

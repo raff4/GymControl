@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
+	xmlns:f='urn:import:com.bertazoli.client.core.fields'
+	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
+	ui:generateLocales='default'>
+
+	<g:HTMLPanel>
+		<div class="marginBottom2">
+			<div class="minWidth600">
+				<g:InlineLabel>
+					<ui:msg description="workoutName">Workout Name</ui:msg>:
+				</g:InlineLabel>
+				<g:TextBox ui:field="workoutName" />
+			</div>
+			
+			<div>
+				<g:InlineLabel>
+					<ui:msg description="workoutDate">Workout Date</ui:msg>:
+				</g:InlineLabel>
+				<d:DateBox ui:field="workoutDate" styleName="width100"/>
+			</div>
+			
+			<span class="button">
+				<g:Button ui:field="addCardio">Add Cardio</g:Button>
+			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="addRegular">Add Regular Set</g:Button>
+			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="addDropSet">Add Dropset</g:Button>
+			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="save">Save</g:Button>
+			</span>
+			<span class="button marginLeft10">
+				<g:Button ui:field="cancel">Cancel</g:Button>
+			</span>
+		</div>
+		<g:HTMLPanel ui:field="workouts"/>
+	</g:HTMLPanel>
+</ui:UiBinder>

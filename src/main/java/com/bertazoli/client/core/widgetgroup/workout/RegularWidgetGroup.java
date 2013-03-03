@@ -2,7 +2,7 @@ package com.bertazoli.client.core.widgetgroup.workout;
 
 
 import com.bertazoli.client.core.widgetgroup.WidgetGroup;
-import com.bertazoli.client.core.workout.WorkoutPresenter.DeleteHandler;
+import com.bertazoli.client.core.workout.add.WorkoutAddPresenter.DeleteHandler;
 import com.bertazoli.client.manager.SecurityManager;
 import com.bertazoli.shared.beans.WorkoutRegular;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -55,5 +55,9 @@ public class RegularWidgetGroup extends Composite implements WidgetGroup<Workout
     
     public void setDeleteHandler(DeleteHandler deleteHandler) {
         this.deleteHandler = deleteHandler;
+    }
+
+    @Override
+    public void validate() {
     }
 }

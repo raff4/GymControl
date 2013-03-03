@@ -5,9 +5,9 @@
 
 	<groupId>com.bertazoli</groupId>
 	<artifactId>GymControl</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
-	<name>MyProject</name>
+	<name>GymControl</name>
 	
 	<properties>
 		<target.jdk>1.6</target.jdk>
@@ -17,6 +17,7 @@
 		<maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
 		<gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
+		<maven-war-plugin.version>2.3</maven-war-plugin.version>
 
 		<gwt.version>2.5.0</gwt.version>
 		<gwtp.version>0.6</gwtp.version>
@@ -28,16 +29,6 @@
 
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>sonatype.snapshots</id>
-			<name>Sonatype snapshot repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<snapshots>
-			</snapshots>
-		</repository>
-	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -191,6 +182,12 @@
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.3</version>
+			<type>maven-plugin</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -253,6 +250,24 @@
 					<copyWebapp>true</copyWebapp>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<warName>GymControl</warName>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>*.html</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -262,7 +277,6 @@
 					<source>${target.jdk}</source>
 					<target>${target.jdk}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<!-- Disable annotation processors during normal compilation -->
 					<proc>none</proc>
 				</configuration>
 			</plugin>
@@ -292,9 +306,7 @@
 					<url>jdbc:mysql://localhost:3306/bertazol_gymcontrol</url>
 					<username>bertazol_gym</username>
 					<password>ta26ti</password>
-					<!-- <context>sampledata</context> -->
-					<!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
-					<!-- <clearCheckSums>true</clearCheckSums> -->
+					<clearCheckSums>true</clearCheckSums>
 					<rollbackTag>initial</rollbackTag>
 				</configuration>
 			</plugin>
@@ -316,6 +328,7 @@
 							<url>jdbc:mysql://bertazoli.com:3306/bertazol_gymcontrol</url>
 							<username>bertazol_gym</username>
 							<password>ta26ti</password>
+							<clearCheckSums>true</clearCheckSums>
 							<rollbackTag>initial</rollbackTag>
 						</configuration>
 					</plugin>

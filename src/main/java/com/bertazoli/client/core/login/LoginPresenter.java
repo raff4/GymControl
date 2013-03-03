@@ -10,6 +10,10 @@ import com.bertazoli.shared.action.LoginResult;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasKeyDownHandlers;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
@@ -27,6 +31,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 public class LoginPresenter extends CustomPresenter<LoginPresenter.MyView, LoginPresenter.MyProxy> {
 
     public interface MyView extends CustomView {
+        HasKeyDownHandlers getFocusPanel();
         HasText getUsername();
         HasText getPassword();
         HasClickHandlers getSendButton();
@@ -72,6 +77,15 @@ public class LoginPresenter extends CustomPresenter<LoginPresenter.MyView, Login
             @Override
             public void onClick(ClickEvent event) {
                 sendCredentialsToServer();
+            }
+        }));
+        
+        registerHandler(getView().getFocusPanel().addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                    sendCredentialsToServer();
+                }
             }
         }));
     }

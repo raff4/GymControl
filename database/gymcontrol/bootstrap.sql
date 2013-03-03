@@ -13,6 +13,7 @@ CREATE TABLE workout (
 CREATE TABLE workout_cardio (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	workoutid int(11) NOT NULL,
+	position TINYINT UNSIGNED,
 	name varchar(45),
 	hours TINYINT UNSIGNED,
 	minutes TINYINT UNSIGNED,
@@ -24,6 +25,7 @@ CREATE TABLE workout_cardio (
 CREATE TABLE workout_regular (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	workoutid int(11) NOT NULL,
+	position TINYINT UNSIGNED,
 	name varchar(45),
 	weight SMALLINT UNSIGNED,
 	sets TINYINT UNSIGNED,
@@ -36,6 +38,7 @@ CREATE TABLE workout_regular (
 CREATE TABLE workout_dropset (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	workoutid int(11) NOT NULL,
+	position TINYINT UNSIGNED,
 	name varchar(45),
 	PRIMARY KEY (id),
 	INDEX workout_dropset_workoutid_idx (workoutid),
@@ -43,10 +46,13 @@ CREATE TABLE workout_dropset (
 );
 
 CREATE TABLE workout_dropset_set (
-	id int(11),
+	id int(11) NOT NULL AUTO_INCREMENT,
 	dropsetid int(11) NOT NULL,
-	sets TINYINT UNSIGNED,
+	position TINYINT UNSIGNED,
 	weight SMALLINT UNSIGNED,
+	sets TINYINT UNSIGNED,
+	repetitions TINYINT UNSIGNED,
+	PRIMARY KEY (id),
 	INDEX dropsetid_idx (dropsetid),
 	FOREIGN KEY (dropsetid) REFERENCES workout_dropset(id) ON DELETE CASCADE
 );

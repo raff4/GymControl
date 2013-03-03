@@ -1,6 +1,7 @@
 package com.bertazoli.shared.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,13 +12,13 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class WorkoutDropSetSet implements IsSerializable {
 
     @Id
+    @GeneratedValue
     private Long id;
-    
-    private Integer dropsetId;
-    
+    private Long dropsetId;
+    private Integer position;
     private Integer sets;
-    
     private Integer weight;
+    private Integer repetitions;
     
     public Long getId() {
         return id;
@@ -27,11 +28,11 @@ public class WorkoutDropSetSet implements IsSerializable {
         this.id = id;
     }
 
-    public Integer getDropsetId() {
+    public Long getDropsetId() {
         return dropsetId;
     }
 
-    public void setDropsetId(Integer dropsetId) {
+    public void setDropsetId(Long dropsetId) {
         this.dropsetId = dropsetId;
     }
 
@@ -49,5 +50,21 @@ public class WorkoutDropSetSet implements IsSerializable {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Integer getRepetitions() {
+        return repetitions;
+    }
+
+    public void setRepetitions(Integer repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

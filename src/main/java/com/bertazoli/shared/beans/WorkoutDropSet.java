@@ -1,6 +1,6 @@
 package com.bertazoli.shared.beans;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,11 +18,12 @@ public class WorkoutDropSet implements IsSerializable {
     @Id
     @GeneratedValue
     private Long id;
-    
+    private Long workoutId;
+    private Integer position;
     private String name;
     
     @Transient
-    private Set<WorkoutDropSetSet> dropSetSet = new HashSet<WorkoutDropSetSet>(0);
+    private Set<WorkoutDropSetSet> dropSetSet = new LinkedHashSet<WorkoutDropSetSet>(0);
 
     public Long getId() {
         return id;
@@ -46,5 +47,21 @@ public class WorkoutDropSet implements IsSerializable {
 
     public void setDropSetSet(Set<WorkoutDropSetSet> dropSetSet) {
         this.dropSetSet = dropSetSet;
+    }
+
+    public Long getWorkoutId() {
+        return workoutId;
+    }
+
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

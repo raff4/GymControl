@@ -14,13 +14,10 @@ public class WorkoutCardio implements IsSerializable {
     @Id
     @GeneratedValue
     private Long id;
-    
     private Long workoutId;
-    
+    private Integer position;
     private String name;
-    
     private Integer hours;
-    
     private Integer minutes;
 
     public Long getId() {
@@ -61,5 +58,13 @@ public class WorkoutCardio implements IsSerializable {
 
     public void setMinutes(Integer minutes) {
         this.minutes = minutes;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 }

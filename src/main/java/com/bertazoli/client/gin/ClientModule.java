@@ -10,6 +10,10 @@ import com.bertazoli.client.core.login.LoginPresenter;
 import com.bertazoli.client.core.login.LoginView;
 import com.bertazoli.client.core.signup.SignupPresenter;
 import com.bertazoli.client.core.signup.SignupView;
+import com.bertazoli.client.core.workout.WorkoutPresenter;
+import com.bertazoli.client.core.workout.WorkoutView;
+import com.bertazoli.client.core.workout.add.WorkoutAddPresenter;
+import com.bertazoli.client.core.workout.add.WorkoutAddView;
 import com.bertazoli.client.gatekeeper.LoggedInGatekeeper;
 import com.bertazoli.client.place.ClientPlaceManager;
 import com.bertazoli.client.place.DefaultPlace;
@@ -17,8 +21,6 @@ import com.bertazoli.client.place.NameTokens;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.bertazoli.client.core.workout.WorkoutPresenter;
-import com.bertazoli.client.core.workout.WorkoutView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -32,7 +34,7 @@ public class ClientModule extends AbstractPresenterModule {
         bindPresenterWidget(FooterPresenter.class, FooterPresenter.MyView.class, FooterView.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
         bindPresenter(SignupPresenter.class, SignupPresenter.MyView.class, SignupView.class, SignupPresenter.MyProxy.class);
-
+        bindPresenter(WorkoutAddPresenter.class, WorkoutAddPresenter.MyView.class, WorkoutAddView.class, WorkoutAddPresenter.MyProxy.class);
         bindPresenter(WorkoutPresenter.class, WorkoutPresenter.MyView.class, WorkoutView.class, WorkoutPresenter.MyProxy.class);
     }
 }

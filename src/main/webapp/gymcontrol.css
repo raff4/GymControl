@@ -11,6 +11,7 @@
 input {
 	border: 1px solid gray;
 	border-radius: 7px;
+	padding-left: 10px !important;
 }
 
 .button button {
@@ -24,6 +25,10 @@ input {
 .footer {
 	position: fixed;
 	bottom: 0px;
+}
+
+.absolute {
+	position: absolute;
 }
 
 .gradientBackground1 {
@@ -62,6 +67,35 @@ input {
 	border-radius: 10px 10px 10px 10px;
 }
 
+.box5 {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.error {
+	background-color: red;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.relative {
+	position: relative;
+}
+
+.delete {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: 10px;
+}
+
+.top8 {
+	top: 8px;
+}
+
 .alignCenter {
 	text-align: center;
 }
@@ -86,12 +120,24 @@ input {
 	vertical-align: top;
 }
 
+.marginBottom2 {
+	margin-bottom: 2px;
+}
+
 .marginLeft10 {
 	margin-left: 10px;
 }
 
+.marginTop0 {
+	margin-top: 0px;
+}
+
 .marginTop10 {
 	margin-top: 10px;
+}
+
+.padding3 {
+	padding: 3px;
 }
 
 .padding5 {
@@ -102,8 +148,27 @@ input {
 	padding: 10px;
 }
 
+.paddingLeft10 {
+	padding-left: 10px;
+}
+
+.paddingRight10 {
+	padding-right: 10px;
+}
+
+.minWidth600 {
+	min-width: 600px;
+}
+
 .width25 {
 	width: 25px;
+}
+
+.width50 {
+	width: 50px;
+}
+.width100 {
+	width: 100px;
 }
 
 .width200 {

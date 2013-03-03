@@ -9,10 +9,8 @@
 	<g:HTMLPanel styleName="gradientBackground2 box padding5 relative marginBottom2">
 		<g:InlineLabel>Name:</g:InlineLabel>
 		<g:TextBox ui:field="name"/>
-		<g:InlineLabel>Hours:</g:InlineLabel>
-		<g:TextBox ui:field="hours" styleName="width25" maxLength="2"/>
-		<g:InlineLabel>Minutes:</g:InlineLabel>
-		<g:TextBox ui:field="minutes" styleName="width25" maxLength="2"/>
-		<g:Image ui:field="delete" styleName="marginLeft10 pointer delete" url="images/delete.png"/>
+		<g:Image ui:field="add" styleName="marginLeft10 pointer absolute top8 marginTop0" url="images/add.png"/>
+		<g:Image ui:field="delete" styleName="marginLeft10 pointer delete top8 marginTop0" url="images/delete.png"/>
+		<g:HTMLPanel ui:field="setsPanel" />
 	</g:HTMLPanel>
 </ui:UiBinder>
